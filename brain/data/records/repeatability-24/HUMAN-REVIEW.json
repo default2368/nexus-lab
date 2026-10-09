@@ -1,0 +1,8 @@
+{
+  "status": "CANDIDATE",
+  "reviewed": false,
+  "requiresHumanReview": true,
+  "promotion": "explicit human approval required — no auto-canonical promotion (REJECTED per altro agent)",
+  "claims": 12,
+  "generatedAt": "2026-10-09T19:08:11.494584+00:00"
+}
