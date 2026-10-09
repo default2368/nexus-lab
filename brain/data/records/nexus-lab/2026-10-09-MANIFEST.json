@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "open-nexus.claim-record/v0.1",
+  "generatedAt": "2026-10-09T19:04:31.439220+00:00",
+  "sourceDir": "/home/user/nexus-lab/NEXUS-LAB",
+  "records": 478,
+  "outputFile": "/tmp/brain-records-final/2026-10-09.jsonl",
+  "filesProcessed": 36,
+  "rule": "text is source authority, embedding is projection, record is source of truth"
+}
