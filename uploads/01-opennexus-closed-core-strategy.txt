@@ -1,0 +1,173 @@
+# OpenNexus — Strategia Closed-Core
+
+> **Kernel chiuso, bordi aperti.** Il motore resta proprietario, la parte configurabile è aperta e standardizzata.
+> Stato: bozza di lavoro — 21 settembre 2026
+
+---
+
+## 1. Principio guida
+
+L'architettura OpenNexus supporta già questa strategia senza forzature:
+
+```text
+Foundation definisce i contratti  →  APERTA (standard pubblici)
+Runtime/Discovery eseguono        →  CHIUSI (motore proprietario)
+```
+
+Regola di dipendenza (già tua, estesa al licensing):
+
+```text
+Closed dipende da Open. Mai il contrario.
+I package aperti devono compilare e testare con ZERO dipendenze chiuse (gate di CI).
+```
+
+## 2. Mappa del confine: cosa è aperto, cosa è chiuso
+
+### 2.1 APERTO — "OpenNexus App Kit" (parte configurabile)
+
+| Componente | Contenuto | Licenza proposta |
+|---|---|---|
+| Contratti Foundation | `ApplicationDefinition`, `ApplicationContext`, `PageRecord`, `PageData` (tipi + JSON Schema) | Apache-2.0 |
+| Presentation Manifest | Schema, validatore, profili di esempio | Apache-2.0 |
+| Provider Interface | Interfaccia provider + **filesystem provider di riferimento** | Apache-2.0 |
+| CLI | `create-opennexus-app`, scaffolding, validazione, contract-test per terze parti | Apache-2.0 |
+| Template Starter | `Simple` come app di esempio completa | Apache-2.0 |
+| Theme Tokens | Schema token semantici (non il motore) | Apache-2.0 |
+| Documentazione | Guide, ADR pubblici, API reference dei contratti | CC-BY-4.0 |
+
+### 2.2 CHIUSO — "OpenNexus Kernel" (motore proprietario)
+
+| Componente | Nota |
+|---|---|
+| `PageController` e pipeline di orchestrazione | Il cuore: resta privato |
+| `DiscoveryServiceV2` (motore) | L'interfaccia è aperta, l'implementazione è chiusa |
+| Provider Redis / virtual avanzati | Solo il filesystem reference è aperto |
+| `BundleCollector`, `normalizeToPageData()` | Interni |
+| Sessione, autenticazione, access-policy enforcement | Interni (le policy come *dichiarazioni* sono aperte) |
+| `ThemeInjector`, build navigation, projection | Interni |
+| App Operations, Hub ospitato | Prodotto/servizio commerciale |
+| Distribuzione | Registry npm privato + Docker images private + license key |
+
+### 2.3 Zone grigie — decisione richiesta
+
+| Componente | Opzione A (aprire) | Opzione B (chiudere) |
+|---|---|---|
+| Contract-test suite del Kernel | Apre fiducia, aiuta NGI | Tiene nascosti comportamenti interni |
+| AuthTemplate / WebPageTemplate | Accelera adozione | Sono differenziazione UX |
+| Adapter Redis base | Prova di self-hosting | Spinge verso hosting a pagamento |
+
+Raccomandazione: aprire contract-test e un template base (adozione > segreto), tenere chiusi template avanzati e hosting.
+
+## 3. Licensing
+
+### 3.1 Parte aperta: Apache-2.0 + CC-BY-4.0
+
+- **Apache-2.0** per codice: permissiva, corporate-friendly, standard industriale. Massimizza adozione da aziende/PA che temono il copyleft.
+- **CC-BY-4.0** per documentazione.
+- Alternativa EUPL valutata e scartata come default: il copyleft europeo è bel segnale politico ma frena l'adozione enterprise. Rivalutare solo se un bando/partner lo richiede.
+
+### 3.2 Kernel: licenza proprietaria (EULA) con tre opzioni
+
+**Opzione 1 — EULA classica (raccomandata per partire)**
+- Binario/sorgente compilato, uso dietro license key, divieto di reverse engineering e ridistribuzione.
+- Clausole chiave: definizione di "Use" (istanze, utenti, pagine), audit right, termination for breach, IP ownership, no warranty + limitation of liability, legge italiana / foro Palermo o arbitrato.
+
+**Opzione 2 — Business Source License - BSL 1.1 (da valutare)**
+- Sorgente visibile ma con uso limitato (tipicamente: produzione a pagamento), con **conversione automatica in open-source dopo N anni** (max 4).
+- Pro: massima garanzia di sovranità per la PA ("se sparite, il codice diventa libero"), marketing potente.
+- Contro: complessità legale, alcuni clienti la percepiscono come "quasi-open".
+- Ideale come offerta **Gov/Enterprise**: BSL per i clienti pubblici, EULA per gli altri.
+
+**Opzione 3 — EULA + Escrow (per PA ed Enterprise)**
+- Sorgente depositato presso escrow agent UE, rilasciato al cliente in caso di: insolvenza, cessazione supporto, breach grave non rimediato.
+- Include: sorgente completo, build docs, verification build annuale.
+- È lo strumento che chiude le gare pubbliche senza aprire nulla.
+
+### 3.3 Marchi e domini
+
+- Marchi "OpenNexus" e "Nexus Lab" restano di proprietà esclusiva della società (uso del marchio NON concesso dalle licenze open).
+- `open-nexus.io` resta asset societario. Nota sovranità: il TLD `.io` è territorio britannico (Chagos) — per il racconto "sovranità europea" valutare `open-nexus.eu` come canonico e `.io` come alias tecnico.
+
+## 4. Modello commerciale (bozza)
+
+| Tier | Prezzo indicativo | Contenuto |
+|---|---|---|
+| **Community** | Gratis | Kernel binario (fino a N pagine/utenti), App Kit completo, supporto community |
+| **Pro** | Abbonamento | Limiti rimossi, aggiornamenti, supporto email, hosting opzionale |
+| **Enterprise** | Contratto | On-premise, SLA, audit right, roadmap influence |
+| **Gov/PA** | Contratto | Enterprise + escrow (o BSL), data residency UE garantita, conformità AI Act documentata |
+
+Hosting gestito su `x.open-nexus.io` come revenue ricorrente. Marketplace template/esperienze come fase 2.
+
+## 5. Compatibilità con i finanziamenti europei (con Kernel chiuso)
+
+| Pista | Compatibilità | Come |
+|---|---|---|
+| **NGI Zero / NLnet** | ✅ SÌ | La candidatura copre **solo la parte aperta**: App Kit, standard, validatori, template starter. Gli output del grant sono open, il Kernel non è toccato. Perfettamente ammissibile. |
+| **EIC Accelerator** | ✅ RAFFORZATA | Kernel proprietario = IP difendibile, barriere all'ingresso, FTO. L'EIC premia exactly questo. |
+| **Horizon Europe** | ✅ SÌ | Schema standard: Kernel come *Background* (pre-esistente, chiuso), risultati del progetto come *Foreground* con access rights negoziati. |
+| **Digital Europe / PA** | ⚠️ CON ESCROW | La PA compra software chiuso ogni giorno; servono escrow, data residency UE, standard aperti di export (che hai: PageRecord/PageData). |
+| **Sovereign Tech Fund** | ❌ NO | Richiede infrastruttura già open e adottata. Non è la tua pista con questa strategia. |
+
+## 6. Sovranità digitale senza open-source (playbook)
+
+Il Kernel chiuso NON ti esclude dal racconto sovranità se garantisci questi 7 punti (checklist commerciale e per i bandi):
+
+1. [ ] Società di diritto italiano, proprietà UE, nessun controllo extra-UE
+2. [ ] Hosting e data residency in UE (documentati contrattualmente)
+3. [ ] Standard aperti di configurazione e interscambio (App Kit Apache-2.0)
+4. [ ] Export completo dei dati in formati aperti (PageRecord/PageData = già il tuo formato)
+5. [ ] Nessuna dipendenza runtime obbligatoria da hyperscaler USA (provider intercambiabili)
+6. [ ] Escrow del sorgente per clienti Gov/Enterprise
+7. [ ] Documentazione di conformità AI Act / GDPR per le esperienze AI future
+
+Messaggio: *"Sovereign by ownership, open by interface."*
+
+## 7. Piano tecnico di separazione
+
+### Fase 0 — Preparazione (2-3 settimane, €0)
+- [ ] Split monorepo: `open-nexus-sdk` (pubblico) + `open-nexus-kernel` (privato)
+- [ ] Split package: `@opennexus/contracts`, `@opennexus/cli`, `@opennexus/starter` (pubblici su npm) vs `@opennexus/kernel` (privato)
+- [ ] Verifica dipendenze: nessun import da privato a pubblico (gate CI: dependency-lint)
+- [ ] Aggiunta header di licenza a tutti i file + file LICENSE corretti
+- [ ] Secret scan completo del futuro repo pubblico (mai pubblicato = mai leakato, ma verificare)
+
+### Fase 1 — Pubblicazione App Kit + candidatura NGI (€0)
+- [ ] README, docs, esempi funzionanti, contract-test
+- [ ] Pubblicazione GitHub (mirror Codeberg come segnale UE)
+- [ ] Candidatura NGI Zero sul prossimo round bimestrale
+
+### Fase 2 — Hardening commerciale (alla costituzione SRL)
+- [ ] Registry privato + license key server (anche minimale: key firmate offline)
+- [ ] EULA v1 + termini Community/Pro
+- [ ] Trasferimento domini, repo, marchi alla SRL (atto cessione IP)
+
+### Fase 3 — Enterprise/Gov readiness (con primo cliente o finanziamento)
+- [ ] Contratto escrow + primo deposito verificato
+- [ ] Valutazione BSL per offerta Gov
+- [ ] Audit sicurezza di base (almeno SAST + dependency review)
+
+## 8. Policy di compatibilità (promessa pubblica)
+
+- Versionamento semantico su tutti i package aperti.
+- Contratti `PageRecord`/`PageData`/`ApplicationDefinition`: **stabili per minor**, breaking solo su major con 6 mesi di deprecation.
+- Compatibility matrix Kernel ↔ App Kit pubblicata a ogni release.
+- Niente telemetry nel Kernel senza opt-in esplicito (punto sovranità/privacy da mettere in homepage).
+
+## 9. Rischi e mitigazioni
+
+| Rischio | Mitigazione |
+|---|---|
+| Sviluppatori diffidenti verso closed-core | App Kit generoso, docs eccellenti, Community tier reale, escrow pubblico come garanzia |
+| Leak accidentale di codice Kernel nel repo aperto | CI gate + code review obbligatoria + repo separati dal giorno 1 |
+| "Open Source first" negli appalti PA | Escrow + standard aperti + BSL come opzione Gov |
+| Competitor open-source puro | Differenziazione su governance/policy/AI-Act-readiness, non su feature grezze |
+| NGI richiede outcome open | Candidare solo App Kit/standard; milestone e deliverable disegnati di conseguenza |
+
+## 10. Decisioni aperte (da prendere insieme)
+
+1. Licenza parte aperta: **Apache-2.0** (raccomandata) vs EUPL (segnale politico)?
+2. Kernel: **EULA classica** subito vs **BSL** anche per il tier standard?
+3. Template (Auth/WebPage): aperti o chiusi?
+4. Dominio canonico: restare su `.io` o spostare su `.eu`?
+5. Timing pubblicazione App Kit: prima o dopo la candidatura NGI? (raccomandato: prima, anche minimale — NGI valuta repository esistenti)

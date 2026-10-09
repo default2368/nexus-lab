@@ -1,0 +1,112 @@
+# Nexus Lab — Recap Brainstorming Startup & Finanziamenti
+
+> Canale: startup societaria + reperimento fondi (europei, italiani, siciliani).
+> Lo sviluppo strategico di prodotto vive in un altro canale — qui solo l'handoff (§7).
+> Ultimo aggiornamento: 21 settembre 2026
+
+---
+
+## 1. Scheda raccolta (i fatti)
+
+| Voce | Stato |
+|---|---|
+| Founder | 58 anni, Palermo (Sicilia) |
+| Posizione attuale | P.IVA forfettaria attiva |
+| Budget disponibile | ~€3.000, vincolo: nessuna spesa anticipata senza esito concreto |
+| Nome società (da costituire) | **Nexus Lab** → "Nexus Lab S.r.l." (SRLS ponte valutata) |
+| Prodotto (una riga) | OpenNexus: piattaforma kernel-driven + overlay epistemico (verticale rifiuti = prima istanza) |
+| Dominio | `open-nexus.io` (di proprietà) — da valutare `nexuslab.it` difensivo e `open-nexus.eu` canonico |
+| IP | Oggi in mano al founder persona fisica — cessione alla SRL da fare alla costituzione |
+| Validazione esterna | Simulazione verticale + terzo interlocutore in corso, feedback atteso (→ lettera di interesse) |
+| Numeri misurati | Nessuno ancora (tempi, volumi, metriche) — da produrre nel canale prodotto |
+
+## 2. Decisioni prese
+
+1. **Closed-core**: Kernel chiuso con licenza proprietaria, parte configurabile (App Kit) aperta. Dettagli licenza rinviati (tema spinoso).
+2. **Costituzione rinviata a gennaio 2027** per preservare il forfettario in tutto il 2027 (il controllo della SRL farebbe decadere dal regime l'anno successivo).
+3. **SRLS ponte (~€320)** solo se serve una società prima dei finanziamenti; altrimenti SRL ordinaria dopo l'ammissione.
+4. **Zero spese anticipate**: domande come team/persona fisica; si spende solo a esito concreto.
+5. **Canali separati**: qui startup+funding, altrove prodotto, con aggiornamenti incrociati.
+
+## 3. Requisiti societari (sintesi operativa)
+
+**Startup innovativa** — società di capitali, <5 anni, ≤€5M, no distribuzione utili, oggetto tecnologico, +1 tra: R&S ≥15% / personale qualificato / brevetto-software. Divieto nascita da ramo d'azienda → alla costituzione: società pulita + **cessione di singoli asset** (codice, domini, marchi), mai conferimento d'azienda.
+
+**Smart&Start** — ≤60 mesi, piccola impresa, piano €100k–1,5M, copertura 80% (il 90% richiede compagine under 36/donne: non accessibile), **Sud = 30% a fondo perduto**. Domanda anche come team, costituzione entro 30 gg dall'ammissione.
+
+**EIC Accelerator (futuro)** — PMI UE autonoma (<25% large corp), TRL 6-8, IP di proprietà della società, cofinanziamento 30%.
+
+**Forfettario** — controllo SRL stesso settore = causa ostativa con decadenza l'anno dopo. Timeline sopra già calibrata. Verificare con commercialista: minimali INPS al passaggio a ordinario + posizione contributiva a 58 anni.
+
+**Patti soci / IP** — alla costituzione: atto cessione IP con data certa, patto parasociale (vesting, lock-up, good/bad leaver), marchi e domini alla società.
+
+## 4. Mappa finanziamenti
+
+### 🇪🇺 Europei
+
+| # | Misura | Importo | Prerequisiti | Finestra | Ruolo |
+|---|---|---|---|---|---|
+| EU-1 | **NGI Zero Commons Fund (NLnet)** | €5–50k | Output open (solo App Kit, Kernel intatto); individui ammessi, no società | Round bimestrali rolling | 🎯 PRIMA pista EU — candidatura a €0 |
+| EU-2 | **EIC Accelerator** | fino €2,5M grant + equity | SRL, TRL 6-8, team, IP, cofin. 30% | Cutoff 4 nov 2026 (troppo presto) → 2027 | Secondo tempo |
+| EU-3 | **Horizon Cluster 4** (digitale/AI) | €4–7M a consorzio | Consorzio 3+ paesi, rete, TRL medio-bassa | Work Programme 2027 | Secondo tempo, come partner tech |
+| EU-4 | **Horizon Cluster 6** (green/circular) | idem | Come sopra, via verticale rifiuti→economia circolare | 2027 | Secondo filone (green) |
+| EU-5 | **Digital Europe / Apply AI** | vari | Società + pilota + deployment PA | 2027 | Terzo tempo |
+| — | Sovereign Tech Fund | — | Richiede infrastruttura già open e adottata | — | ❌ Non compatibile col closed-core |
+
+### 🇮🇹 Italiani
+
+| # | Misura | Importo | Prerequisiti | Finestra | Ruolo |
+|---|---|---|---|---|---|
+| IT-1 | **Smart&Start (team)** | fino €1,5M, 80% + 30% fp Sud | Team → SRL ≤60 mesi, startup innovativa | Sportello continuo, istruttoria 60–90 gg | 🎯 PRIMA pista ITA — candidatura a €0 |
+| IT-2 | **Microcredito** | piccoli importi + tutoraggio | Over 35 ammesso | Continuo | Ponte per costi vivi |
+| — | ON / Resto al Sud 2.0 | — | Under 35/36 o donne | — | ❌ Non accessibili per età |
+
+### 🟡 Siciliani
+
+| # | Misura | Importo | Prerequisiti | Finestra | Ruolo |
+|---|---|---|---|---|---|
+| SI-1 | **FESR "nuove imprese innovative"** | €22,3M totali, fino 70–80%, <60 mesi | Micro/piccola impresa innovativa | Annunciato apr 2026, avviso atteso | 🎯 Monitorare mese per mese |
+| SI-2 | **IRFIS FinSicilia** | varie (8 misure aperte) | Da verificare allo sportello | Aperte | Visita a Palermo |
+| SI-3 | **DIGIT Imprese Sicilia** | fino €48k per PMI clienti | — | — | Leva commerciale, non domanda diretta |
+
+### Ecosistema gratuito (usare subito)
+
+ARCA (incubatore Unipa) · EDIH Sicilia · CCIAA Palermo-Enna · APRE (NCP bandi EU). Mentoring, pre-incubazione, orientamento bandi, ricerca partner: tutto a €0.
+
+## 5. Decisioni aperte (rinviate consapevolmente)
+
+1. Licenza parte aperta: Apache-2.0 vs EUPL.
+2. Kernel: EULA classica vs BSL (almeno per offerta Gov) + escrow.
+3. Template aperti o chiusi.
+4. Dominio canonico: `.io` vs `.eu`.
+5. Timing pubblicazione App Kit vs candidatura NGI.
+
+## 6. Timeline operativa
+
+- **Q4 2026 (€0)** — email/landing su dominio · repo e docs · demo 3 minuti (canale prodotto) · business plan 10 slide · **domande Smart&Start team + NGI** · visite ARCA/IRFIS/EDIH/CCIAA · feedback terzo + **lettera di interesse** · monitoraggio avviso FESR.
+- **Gen 2027 (~€1.500–2.000)** — costituzione SRLS/SRL + sezione speciale startup + cessione IP + PEC/firma. Forfettario salvo tutto il 2027.
+- **2027** — fondi in arrivo · migrazione clienti P.IVA→SRL · primo team/partner · preparazione EIC/Horizon con credibilità (grant vinto + pilota + metriche).
+
+## 7. Handoff verso il canale prodotto 📤
+
+Risultati di questo brainstorming utili allo sviluppo (dettagli nei doc `01-opennexus-closed-core-strategy.md`, `02-opennexus-cognition-roadmap.md`, `03-opennexus-verticale-rifiuti.md`):
+
+- Epistemic Layer ("Understand") sopra i contratti, zero modifiche al Kernel.
+- Meta-modello entità/sub-entità + Ecosystem Pack (verticale = configurazione).
+- Metodo epistemico: assunzioni → verifiche V1/V2 → step di arresto → claim ledger.
+- Tempi macchina L0–L3 (minuti) vs tempo di calendario; prezzi sul valore.
+- Closed-core: confine Foundation-aperta/motore-chiuso + gate CI anti-leak.
+
+## 8. Cosa serve indietro dal canale prodotto 📥
+
+Per sbloccare domande e bandi, in ordine di priorità:
+
+1. **Demo video 3 minuti** (RAG governata o screening verticale) → NGI, EIC Step 1, Smart&Start.
+2. **Tempi e volumi misurati** ("L1 su N record: X minuti") → SLA, benchmark, bandi.
+3. **Feedback terzo classificato + lettera di interesse** → allegato bandi.
+4. **App Kit pubblicato** (anche minimale) → prerequisito NGI.
+5. Metriche eval minime (citation precision, policy-leakage = 0) → credibilità tecnica.
+
+## 9. Prossima azione (una sola)
+
+🎯 **Questa settimana**: attivare email + landing su `open-nexus.io` e inviare al terzo interlocutore le 5 domande strutturate di feedback con richiesta di lettera di interesse. È l'azione a €0 con più leva su tutto il resto.

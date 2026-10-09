@@ -1,0 +1,43 @@
+schemaVersion: "1"
+packetId: "pub-on-acq-2026-1.0-r1"
+
+source:
+  kind: review-workspace
+  repository: null
+  path: brain/knowledge/10-KNOWLEDGE-ACQUISITION-AND-INGESTION-ARCHITECTURE.md
+  commit: null
+  sha256: 9ce64c9d7c8b33b753decc8acdff660dda8634939dcfeb8b5b467b751a82d138
+  lineCount: 1082
+  byteSize: 28539
+
+document:
+  id: ON-ACQ-2026-1.0
+  type: ARCHITECTURE_SPECIFICATION
+  lifecycle: APPROVED_FOR_PUBLICATION
+  authorityScope: CROSS_REPOSITORY
+  sensitivity: internal
+  revision: "1.1"
+
+target:
+  repository: default2368/nexus-lab-documentation
+  path: docs/architecture/cross-repo/KNOWLEDGE-ACQUISITION-AND-INGESTION.md
+
+allowedFiles:
+  - docs/architecture/cross-repo/KNOWLEDGE-ACQUISITION-AND-INGESTION.md
+  - docs/README.md
+  - sources/DOCUMENT-INVENTORY.yaml
+
+approval:
+  approvedBy: owner
+  approvedAt: null
+  status: PENDING_OWNER_CONFIRMATION
+
+suggestedCommitMessage: "docs(acquisition): publish approved ingestion architecture"
+
+publisherRules:
+  exactCopy: true
+  reinterpretationAllowed: false
+  stopOnSourceHashMismatch: true
+  stopOnTargetOutsideAllowlist: true
+  commitRequiresOwnerApproval: true
+  pushRequiresOwnerApproval: true

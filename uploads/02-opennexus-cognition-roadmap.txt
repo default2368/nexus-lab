@@ -1,0 +1,134 @@
+# OpenNexus — Roadmap R&D: Epistemic & RAG Layer ("Understand")
+
+> La Foundation è chiusa. Il backend esegue. Ora si costruisce il capire.
+> Stato: mappa di ricerca e sviluppo — 21 settembre 2026
+
+---
+
+## 0. Tesi centrale
+
+OpenNexus possiede già, senza saperlo, **metà di un sistema RAG governato**:
+
+| Concetto RAG classico | Equivalente OpenNexus esistente |
+|---|---|
+| Corpus / document store | PageRegistry + provider (redis/virtual/filesystem) |
+| Document ID stabile | `registryId` (identity authority) |
+| Metadata / provenance | `PageRecord` (app, policy, template, source) |
+| Access control | Policy PUBLIC/PROTECTED/HIDDEN/DISABLED + session |
+| Context assembly | `normalizeToPageData()` |
+| Presentation | Template + Experiences |
+
+Ciò che manca è il layer che trasforma tutto questo in **comprensione verificabile**: retrieval semantico, giustificazione epistemica, generazione vincolata. Lo chiamiamo **Epistemic Layer** (nome di lavoro: *Nexus Mind*). Si appoggia ai contratti esistenti — **zero modifiche al Kernel**, come da Golden Rule.
+
+```text
+Discovery (risoluzione)  →  Epistemic Layer (comprensione)  →  Runtime (orchestrazione)  →  Rendering
+```
+
+---
+
+## 1. Perché OpenNexus è insolitamente adatto alla RAG affidabile
+
+La RAG standard ha 5 problemi noti. L'architettura OpenNexus ne risolve strutturalmente 4:
+
+1. **Provenance mancante** → ogni chunk può puntare a un `registryId` stabile e versionato. Citazioni deterministiche, non fuzzy.
+2. **Leak di contenuti riservati nel retrieval** → le policy esistono *prima* della generazione. Il retrieval filtra per policy+sessione: un modello non può citare ciò che l'utente non può vedere. (Quasi nessun framework RAG fa questo nativamente.)
+3. **Contraddizioni nel corpus** → i provider hanno già una regola di priorità (`redis > virtual > filesystem > local`): è una **regola di revisione delle credenze** (belief revision). Va solo esplicitata e resa ispezionabile.
+4. **Contesto non tipizzato** → `PageData` è un modello canonico: il generatore lavora su oggetti tipizzati, non su testo grezzo. Generation vincolata a schema.
+5. **Valutazione impossibile** → i contract test esistenti sono il seme di un eval harness epistemico (fedeltà, citazioni, rifiuti calibrati).
+
+Questo è il differenziatore da scrivere nei bandi: *"policy-aware, provenance-native RAG over governed knowledge — AI Act ready by architecture."*
+
+---
+
+## 2. Mappa degli sviluppi interessanti
+
+### A. Governed RAG (priorità 1 — sblocca tutto)
+
+- **Policy-filtered retrieval**: il retriever interroga Discovery con il contesto di sessione; i record HIDDEN/DISABLED e i PROTECTED senza sessione non entrano mai nel contesto. Audit log di *cosa è stato recuperato per quale risposta*.
+- **Citation-by-registryId**: ogni affermazione generata cita `registryId` (+ versione). Il frontend rende le citazioni cliccabili → navigazione dalla risposta alla fonte (Related Pages/References già esistono come UI).
+- **Refusal calibrato**: se il retrieval non trova evidenza sufficiente sopra soglia, il sistema dichiara di non sapere invece di allucinare. Metrica: refusal precision/recall.
+- **Prompt assembly da PageData**: template di prompt versionati come gli altri template; il generatore riceve solo modelli costruiti (coerente con "Templates receive data; they do not fetch it").
+
+### B. Motore epistemico (il cuore della ricerca)
+
+- **Provenance completa**: chunk → pagina → versione → provider → timestamp → autore/curatore. Lineage ispezionabile per ogni risposta (requisito AI Act per sistemi ad alto rischio: trasparenza e tracciabilità).
+- **Rilevamento contraddizioni**: quando due PageRecord affermano cose incompatibili sullo stesso soggetto, il sistema lo segnala invece di fondere silenziosamente. Output: "le fonti divergono" + confronto. (Quasi nessuno lo fa bene: spazio di ricerca aperto.)
+- **Validità temporale**: conoscenza con `validFrom/validUntil`; risposte "storiche" vs "correnti" ("al 2024 la norma diceva X, oggi dice Y"). Fondamentale per PA e normativa.
+- **Confidence epistemica**: punteggio composto da qualità retrieval + accordo tra fonti + freschezza + policy del record. Mai un singolo numero magico: sempre scomposto e spiegabile.
+- **Belief revision esplicita**: la priorità dei provider diventa politica configurabile e auditabile ("perché questa risposta usa la fonte A e non B").
+
+### C. Algoritmi di retrieval (ricerca applicata)
+
+- **Hybrid retrieval**: BM25 (testo, ottimo per italiano giuridico/tecnico) + vettori (semantica) + reranker. Baseline solida, poi si innova sopra.
+- **Registry-anchored retrieval**: se la query contiene o implica un'entità nota (pagina, concetto, app), risoluzione deterministica via `registryId` *prima* della ricerca fuzzy. Il deterministico batte il probabilistico dove l'identità è nota — principio architetturale, non trucco.
+- **GraphRAG su grafo esistente**: Related Pages + References + Journey + navigazione formano già un grafo. Retrieval a 1-2 hop per risposte multi-fonte ("come X si collega a Y"). Confronto BM25 vs vettori vs grafo = materiale da benchmark.
+- **Retrieval multilingua**: query in italiano su corpus misto (tipico mediterraneo: IT/EN/FR/ES). Embedding multilingua + rerank cross-lingua.
+- **Chunking semantico da PageData**: non chunk a caratteri, ma chunk per sezione tipizzata (Hero/Features/Content/References) con pesi diversi. Le References pesano come evidenza, il marketing no.
+
+### D. Agenti governati (fase avanzata)
+
+- **Controller-driven agents**: agenti che attraversano la stessa pipeline del `PageController` (resolve → policy check → navigation) invece di tool generici. Ogni azione dell'agente è soggetta a policy e loggata.
+- **Navigazione come tool**: l'agente "naviga" il grafo delle pagine come farebbe un utente (click su Related/References), producendo percorsi ispezionabili (Journey reali, non black-box).
+- **Generazione curata**: l'agente propone nuove pagine/aggiornamenti che finiscono in coda di revisione in Operations (human-in-the-loop). Il corpus migliora senza perdere governance.
+
+### E. Stack sovrano (coerente con la strategia UE)
+
+- **Embedding e reranker locali**: modelli aperti multilingua, self-hosted, nessun dato verso API extra-UE. Il retrieval non deve mai chiamare servizi esterni.
+- **Generatori intercambiabili**: interfaccia modello-agnostica (API UE, modelli aperti self-hosted, futuro modello italiano/europeo). Mai un solo vendor.
+- **Italian-first**: benchmark e tuning su italiano reale (burocratico, tecnico, turistico-culturale). Pochi lo fanno bene: nicchia difendibile.
+- **ONNX/quantizzazione per on-premise PA**: inferenza su hardware modesto per clienti governativi senza GPU farm.
+
+### F. Eval epistemico (infrastruttura di ricerca)
+
+- **Harness di valutazione** su: faithfulness (niente affermazioni senza fonte), citation precision/recall, refusal calibration, contradiction handling, policy leakage (test avversariali: "il modello rivela contenuti PROTECTED?" — deve essere sempre NO).
+- **Dataset di test dal corpus reale**: domande generate dalle pagine Simple/OpenNexus con risposte attese + fonti. Ogni app diventa il suo benchmark.
+- **Regressione epistemica in CI**: come i contract test del Kernel, ma per la qualità della comprensione. "Nessuna release peggiora la verità."
+
+### G. Operations come cockpit epistemico (human-in-the-loop)
+
+- Coda di revisione: risposte a bassa confidence, contraddizioni rilevate, proposte di nuove pagine dagli agenti.
+- Feedback dei curatori → pesi del retrieval (RLHF-lite su corpus governato, senza toccare i pesi del modello).
+- Dashboard: copertura del corpus, domande senza risposta (gap di conoscenza), drift temporale.
+
+---
+
+## 3. Roadmap a fasi (stima effort singolo sviluppatore)
+
+### Fase 1 — Governed RAG minima (4-6 settimane) — sblocca NGI/demo/bandi
+- [ ] Indicizzazione: PageRecord → chunk tipizzati + embedding locali + BM25
+- [ ] Retrieval con filtro policy+sessione + audit log
+- [ ] Prompt assembly da PageData + generazione con citazioni registryId
+- [ ] UI citazioni cliccabili in un template
+- [ ] 20-30 domande di test con risposte attese (primo eval set)
+- **Output**: demo "chiedi al corpus, ottieni risposte citate e governate". È il video da 3 minuti per EIC/NLnet.
+
+### Fase 2 — Retrieval avanzato + eval (6-8 settimane)
+- [ ] Hybrid BM25+vettori+rerank, registry-anchored resolution, chunking semantico
+- [ ] GraphRAG a 1 hop su Related/References
+- [ ] Harness F + test avversariali anti-leakage
+- [ ] Benchmark IT/EN, report comparativo
+
+### Fase 3 — Epistemica profonda (8-12 settimane, anche in parallelo)
+- [ ] Contraddizioni, validità temporale, confidence scomposta, belief revision configurabile
+- [ ] Operations cockpit (G)
+- [ ] Primo whitepaper tecnico (materiale Horizon + credibilità)
+
+### Fase 4 — Agenti + stack sovrano (trimestre 2-3)
+- [ ] Controller-driven agents + generazione curata
+- [ ] Hardening on-premise, quantizzazione, modello-agnosticismo completo
+
+Ogni fase è **autonoma e dimostrabile** (niente big-bang), e nessuna tocca il Kernel: tutto nuovo codice dietro i contratti esistenti.
+
+## 4. Posizionamento per la ricerca europea (keyword)
+
+- *Trustworthy AI, neuro-symbolic AI, human-centric AI, AI Act compliance by design*
+- *Policy-aware retrieval, provenance-native generation, epistemic evaluation*
+- *Digital commons, open standards, European language technologies (Italian-first)*
+- *Data spaces readiness*: PageRecord come candidato "data asset" scambiabile in un data space (allineamento IDSA/DSBA come fase futura)
+
+## 5. Decisioni aperte
+
+1. Nome del layer: *Epistemic Layer*, *Nexus Mind*, altro?
+2. Dove vive il codice: repo separato `open-nexus-mind` (privato, come il Kernel) con interfacce aperte nell'App Kit?
+3. Primo corpus pilota: documentazione OpenNexus stessa (dogfooding, gratis) vs dominio verticale (PA/cultura)?
+4. Metriche minime della Fase 1: soglia di citation precision target (es. ≥0.85)?

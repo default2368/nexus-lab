@@ -1,0 +1,50 @@
+backups/discovery-backup-2026-02-07T08-01-18/defaults.ts:5:import type { Page, PageMeta, PolicyFlags, PolicyName } from '@/types/discovery/core.new';
+backups/discovery-backup-2026-02-14T19-05-58/defaults.ts:5:import type { Page, PageMeta, PolicyFlags, PolicyName } from '@/types/discovery/core.new';
+src/config/discovery/defaults.ts:5:import type { Page, PageMeta, PolicyFlags, PolicyName } from '@/types/discovery/core.new';
+backups/discovery-backup-2026-02-07T08-01-18/defaults.ts:5:import type { Page, PageMeta, PolicyFlags, PolicyName } from '@/types/discovery/core.new';
+backups/discovery-backup-2026-02-14T19-05-58/defaults.ts:5:import type { Page, PageMeta, PolicyFlags, PolicyName } from '@/types/discovery/core.new';
+src/config/discovery/defaults.ts:5:import type { Page, PageMeta, PolicyFlags, PolicyName } from '@/types/discovery/core.new';
+src/types/discovery/index.ts:8:} from './policy.new';
+CHANGELOG.md:1903:- **Flags safety**: `indexed` defaults to `false` if missing (dev/debug pages won't be indexed by default)
+CHANGELOG.md:2824:    ├── defaults.ts     Default mapping e resolver
+docs/adr/ADR-00XY-application-page-contract.md:13:`HIDDEN` è anche default fallback (`defaults.ts:76`).
+docs/adr/ADR-00XY-application-page-contract.md:40:- `src/config/discovery/defaults.ts:76`
+docs/architecture/foundation.md:22:- **Stability guarantees for the 0.5.x series** — type shapes allow field additions only; function signatures allow parameter additions only (with defaults); [`OpenFavTemplateProps`](../../src/react/templates/template-props.ts) is frozen; [`PageRecord`](../../src/types/discovery/page.ts) is the universal Discovery contract.
+docs/architecture/stable-core.md:367:2. **Function signatures** — parameter additions only (with defaults); no parameter removals
+docs/plans/PRD-0.6.3.5-explorer-infrastructure-extraction.md:202:- `forExplorer` already exists as a discovery default ([`src/config/discovery/defaults.ts:165`](../../src/config/discovery/defaults.ts)): `pages.filter(p => p.active)` — a domain-selection hook already present.
+docs/reports/0.8/ADR-IMPACT-MATRIX.md:29:| 5 | Contraddizione HIDDEN | `git grep HIDDEN` → `policies.ts:72-76`, `defaults.ts:76` default HIDDEN | HIDDEN è preset + fallback | Nessuna categoria Hidden Page; solo `navigation.visible=false` ortogonale |
+docs_legacy/duplicates/old/11-discovery-system.md:257:├── defaults.ts       # DEFAULT_PAGE_CONFIG + builder/resolvePolicy
+docs_legacy/duplicates/old/discover-analisys.md:40:│   ├── defaults.ts       # Risoluzione pagine
+docs_legacy/duplicates/old/discover-analisys.md:57:| `defaults.ts` | Risolve `PageMeta` → `Page` completa, gestisce mapping path logico → fisico |
+docs_legacy/duplicates/old/discover-analisys.md:189:| `defaults.ts` | `policies.ts`, `template-manager.ts`, `@/types/discovery` |
+docs_legacy/duplicates/old/discover-analisys.md:216:2. **Path Mapping Hardcoded in `defaults.ts`**
+docs_legacy/duplicates/old/runtime-contract-test-plan.md:42:| `flags` | Sempre Record con defaults |
+docs_legacy/duplicates/old/webpage-template-upgrade-plan.md:149:- `normalizeFlags()` → flag defaults
+docs_legacy/duplicates/open-nexus-platform-docs/foundation.md:22:- **Stability guarantees for the 0.5.x series** — type shapes allow field additions only; function signatures allow parameter additions only (with defaults); `OpenFavTemplateProps` is frozen; `PageRecord` is the universal Discovery contract.
+docs_legacy/pre-0.6/openfav-era/11-discovery-system.md:257:├── defaults.ts       # DEFAULT_PAGE_CONFIG + builder/resolvePolicy
+docs_legacy/pre-0.6/openfav-era/discover-analisys.md:40:│   ├── defaults.ts       # Risoluzione pagine
+docs_legacy/pre-0.6/openfav-era/discover-analisys.md:57:| `defaults.ts` | Risolve `PageMeta` → `Page` completa, gestisce mapping path logico → fisico |
+docs_legacy/pre-0.6/openfav-era/discover-analisys.md:189:| `defaults.ts` | `policies.ts`, `template-manager.ts`, `@/types/discovery` |
+docs_legacy/pre-0.6/openfav-era/discover-analisys.md:216:2. **Path Mapping Hardcoded in `defaults.ts`**
+docs_legacy/pre-0.6/plans/runtime-contract-test-plan.md:42:| `flags` | Sempre Record con defaults |
+docs_legacy/pre-0.6/plans/webpage-template-upgrade-plan.md:149:- `normalizeFlags()` → flag defaults
+openfav.txt:37:│       ├── defaults.ts     # Default mapping e resolver
+scripts/design/check-style-authority.mjs:66:// Raw palette roots (Tailwind defaults) are treated as Category B/D violations.
+src/config.ts:11:// Ensure all required exports exist with defaults
+src/config/applications/factory.ts:40: * @param namespace - Application namespace for page IDs (defaults to id)
+src/config/discovery/README.md:8:├── defaults.ts               ← Logica di trasformazione (resolvePage, pageFilters)
+src/react/components/explorer/ApplicationsTable.tsx:33:    /** Column set — defaults to all six, in canonical order. */
+src/react/components/explorer/ExplorerToolbar.tsx:12:    /** Brand link label (defaults to "OpenFav"). */
+src/react/templates/VirtualPageTemplate.tsx:44: * 2. Mappa la pagina a questo template nel defaults.ts
+src/react/templates/old/VirtualPageTemplate-copy.tsx:38: * 2. Mappa la pagina a questo template nel defaults.ts
+src/types/runtime/page-data.ts:66:  // Flags (always present — normalizeToPageData produces defaults)
+src/types/runtime/references.ts:19:  /** Optional section title (defaults to "References") */
+src/types/runtime/related-pages.ts:21:  /** Optional section title (defaults to "Related") */
+tests/debug/discovery-v2-debug.test.ts:6:import { resolveAllPages } from '@/config/discovery/defaults';
+tests/unit/about-page.test.ts:7:import { resolveAllPages } from '@/config/discovery/defaults';
+tests/unit/chat-provider.test.ts:85:  test('an unset switch defaults to the legacy contract', () => {
+tests/unit/page-helpers.test.ts:14:    it('should create a page with defaults', () => {
+tests/unit/pageAdapter.test.ts:117:    it('should normalize flags with defaults', () => {
+tests/unit/pageSpec.test.ts:113:    it('should use defaults when optional fields are missing', () => {
+tests/unit/pagesSpecNormalize.test.ts:6:    it('should normalize a minimal PageSpecV1 with defaults', () => {
+src/types/discovery/policy.new.ts

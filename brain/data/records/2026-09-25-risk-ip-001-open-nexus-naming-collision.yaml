@@ -1,0 +1,92 @@
+schema_version: "0.1"
+record_type: milestone
+id: RISK-IP-001
+title: Collisione nominale Open Nexus
+registered_at: "2026-09-25"
+discovered_at: "2026-09-25"
+status: OPEN
+severity: HIGH
+category:
+  - brand
+  - intellectual-property
+  - market-identity
+epistemic_status: inferred
+
+summary: >-
+  È stata osservata una collisione nominale materialmente rilevante tra
+  Open Nexus e operatori esistenti nel software e nei servizi tecnologici.
+  La collisione non dimostra copia, furto o mala fede, ma introduce un gate
+  di trademark clearance prima di ulteriori investimenti pubblici sul nome.
+
+observed:
+  - statement: Esistono operatori che utilizzano denominazioni Open Nexus.
+    evidence_refs:
+      - EVIDENCE-OPEN-NEXUS-CLOUD
+      - EVIDENCE-OPEN-NEXUS-APP
+      - EVIDENCE-OPEN-NEXUS-DOCS
+  - statement: Almeno uno degli operatori osservati offre software e servizi tecnologici.
+    evidence_refs:
+      - EVIDENCE-OPEN-NEXUS-CLOUD
+  - statement: La scoperta ha inciso sulla strategia di esposizione pubblica del nome.
+    evidence_refs:
+      - DECISION-BRAND-FREEZE
+
+inferred:
+  - statement: Può esistere un rischio di confusione o di limitazione d'uso.
+    confidence: medium
+  - statement: Il rischio può essere maggiore nelle classi relative a software e SaaS.
+    confidence: medium
+  - statement: La differenziazione narrativa e di dominio applicativo potrebbe non essere sufficiente sul piano giuridico.
+    confidence: medium
+
+unknown:
+  - Diritti registrati e rispettive priorità.
+  - Estensione territoriale degli eventuali diritti.
+  - Classi merceologiche coperte.
+  - Effettiva libertà d'uso della denominazione Open Nexus.
+  - Difendibilità dell'uso pregresso del progetto.
+  - Relazioni societarie o giuridiche tra i domini osservati.
+
+decisions:
+  - id: DECISION-BRAND-FREEZE
+    statement: Congelare nuovi investimenti pubblici significativi sul marchio Open Nexus fino alla trademark clearance.
+    status: active
+  - id: DECISION-NO-IMPULSIVE-RENAME
+    statement: Non rinominare per ora codebase, architettura e artefatti storici.
+    status: active
+  - id: DECISION-PRESERVE-FIRST-USE
+    statement: Preservare le evidenze verificabili di primo utilizzo.
+    status: active
+
+next_actions:
+  - Ricerca ufficiale su EUIPO/TMview, UIBM e WIPO.
+  - Verifica con un consulente specializzato in proprietà intellettuale.
+  - Costruzione di una timeline comparata basata su evidenze datate.
+  - Preparazione di scenari distinti di continuità, uso limitato o rebranding commerciale.
+
+evidence:
+  - id: EVIDENCE-OPEN-NEXUS-CLOUD
+    kind: external-web-resource
+    uri: "https://open-nexus.cloud/"
+    captured: false
+    note: La risorsa deve essere acquisita e datata nel bundle probatorio.
+  - id: EVIDENCE-OPEN-NEXUS-APP
+    kind: external-web-resource
+    uri: "https://app.open-nexus.com/"
+    captured: false
+    note: La risorsa deve essere acquisita e datata nel bundle probatorio.
+  - id: EVIDENCE-OPEN-NEXUS-DOCS
+    kind: external-web-resource
+    uri: "https://docs.open-nexus.com/"
+    captured: false
+    note: La risorsa deve essere acquisita e datata nel bundle probatorio.
+
+constraints:
+  - Non qualificare la collisione come furto, copia o illecito senza evidenza verificabile.
+  - Non trattare questo record come parere legale.
+  - Separare sempre fatti osservati, inferenze, decisioni e incognite.
+
+closure_criteria:
+  - Trademark search documentata con query, data, fonte e risultati.
+  - Parere professionale o decisione owner esplicita sui rischi residui.
+  - Decisione registrata sull'uso pubblico, limitato o sostitutivo del nome.

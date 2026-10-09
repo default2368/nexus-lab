@@ -1,0 +1,267 @@
+Se davvero Phase 1, Phase 2 e Phase 3 sono andate in porto senza regressioni significative, allora aggiornerei la roadmap in modo abbastanza netto.
+
+Non siamo più nella fase:
+
+Capire l'authority
+
+
+ma nella fase:
+
+Consumare correttamente le authority
+
+Stato attuale
+Foundation
+✅ Application Authority
+
+src/config/applications
+
+✅ Content Authority
+
+src/config/discovery/page-registry
+
+✅ Domain Authority
+
+src/core/domain-authority
+
+✅ Design Authority
+
+src/core/design-authority
+
+✅ Theme Authority
+
+ThemeInjector
+
+
+Questa è già un'architettura notevolmente più robusta della 0.6.3.x.
+
+Prossimo step reale
+Phase 4 — Primitive Consolidation
+
+Questa ormai è la candidata naturale.
+
+Obiettivo
+
+Rispondere a:
+
+Chi possiede le primitive UI?
+
+
+L'inventory aveva già individuato:
+
+Explorer Layer
+
+
+contro
+
+Radix/UI Layer
+
+File target
+Explorer
+src/react/components/explorer/*
+
+Common
+src/react/components/common/Navbar.tsx
+
+src/react/components/common/TemplateHeader.tsx
+
+src/react/components/common/ThemeToggle.tsx
+
+UI Kit
+src/react/components/ui/*
+
+Decisioni da prendere
+Explorer diventa Foundation Primitive Layer?
+
+oppure
+
+Radix diventa Foundation Primitive Layer?
+
+Ad oggi io vedo più probabile:
+
+Explorer
+↓
+Foundation Primitive Layer
+
+
+perché è già il blocco più utilizzato.
+
+Deliverable
+
+Nuova authority:
+
+Primitive Authority
+
+
+Possibile struttura futura:
+
+src/core/ui-primitives
+
+
+oppure
+
+src/core/design-authority/primitives
+
+
+Non la sposterei subito.
+
+Prima censimento.
+
+Poi authority map.
+
+Poi consolidamento.
+
+Fase successiva
+Design Enforcement
+
+Solo dopo Primitive Consolidation.
+
+Obiettivo:
+
+vietare regressioni
+
+
+Controlli:
+
+hex colors
+
+rgb
+
+rgba
+
+bg-blue-*
+
+text-blue-*
+
+bg-red-*
+
+text-red-*
+
+
+con eccezioni:
+
+brand
+
+decorative
+
+legacy
+
+Grande milestone successiva
+
+Secondo me non è Admin New.
+
+È:
+
+Presentation Authority
+
+
+Domanda:
+
+Come un'applicazione esprime la propria identità?
+
+
+Per esempio:
+
+applications/core-admin
+│
+├── assets
+├── logo.svg
+└── presentation.manifest.ts
+
+
+Modello:
+
+Design Authority
+↓
+meaning
+
+Theme Authority
+↓
+state
+
+Presentation Authority
+↓
+identity
+
+Admin New
+
+A quel punto diventa naturale.
+
+Consumer di:
+
+Domain Authority
+
+Design Authority
+
+Presentation Authority
+
+
+Dashboard iniziali:
+
+Domain Health
+
+Design Health
+
+Presentation Health
+
+Application Health
+
+Roadmap aggiornata
+0.7.0
+✅ Application Authority
+
+✅ Domain Authority
+
+✅ Design Authority
+
+✅ Theme Authority
+
+0.7.0.1
+Primitive Consolidation
+
+0.7.0.2
+Design Enforcement
+
+0.7.0.3
+Presentation Authority
+
+Asset Ownership
+
+Presentation Manifest
+
+0.7.0.4
+Admin New Era
+Phase 1
+
+
+La cosa interessante è che finora non state "spostando codice".
+
+State continuando a rispondere alla stessa domanda:
+
+Chi possiede cosa?
+
+
+Prima era:
+
+Applicazioni
+
+
+poi:
+
+Governance
+
+
+poi:
+
+Design
+
+
+adesso, secondo me, è il turno di:
+
+Primitive UI
+
+e
+
+Presentation Identity
+
+
+che sono probabilmente gli ultimi due grandi domini ancora senza un'authority completamente formalizzata.

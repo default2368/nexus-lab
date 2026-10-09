@@ -1,0 +1,297 @@
+# OpenNexus — Verticale Rifiuti & Metodo Overlay Epistemico
+
+> Dossier di lavoro — caso pilota simulato: piattaforma legacy gestione rifiuti (trasporti, carichi, scarichi).
+> Stato: **ipotesi di lavoro consistenti, strumenti in fase di sviluppo, numeri non ancora misurati** — 21 settembre 2026
+> Nota di onestà: la simulazione è nata come esercizio di problem-framing (primo caso di studio con interlocutore terzo).
+> Ogni sezione sotto è marcata: 🟢 validato | 🟡 ipotesi solida | 🔴 da costruire.
+
+---
+
+## 1. Il paradigma: overlay interpretativo non invasivo
+
+La frase chiave è la tua: *"scrive un linguaggio che interpreta i dati sottostanti, non si sovrappone all'esistente."*
+
+Questo è un paradigma preciso, con un nome: **Epistemic Overlay**. Principi:
+
+```text
+1. Read-only sul sistema esistente: nessun migration, nessun rewrite, nessun rischio operativo.
+2. OpenNexus costruisce un LINGUAGGIO sopra i dati: entità, relazioni, bisogni, metriche.
+3. Il valore è la COMPRENSIONE, non la sostituzione: il legacy continua a lavorare, noi lo rendiamo leggibile.
+4. Ogni affermazione è tracciata alla fonte (registryId → record/DOCUMENTO originale).
+```
+
+Perché vende (motivo commerciale n.1): il cliente con un sistema vecchio e complesso ha **paura di toccarlo**. Chi propone di sostituirlo perde; chi propone di *capirlo senza toccarlo* vince. Zero rischio operativo, valore in settimane.
+
+Mappatura architetturale (zero modifiche al Kernel):
+
+```text
+Sistema legacy (DB, gestionali, portali, PDF, fogli)
+        ↓ connector read-only (nuovo provider Discovery)
+PageRecord per ogni entità/documento/flusso
+        ↓ Epistemic Layer (analisi, grafo, verifiche)
+PageData analitico (screening, benchmark, audit, metriche)
+        ↓ Experience dashboard + grafo visuale
+Decisioni del cliente
+```
+
+### Tempo macchina vs tempo processo (correzione fondamentale)
+
+La ricostruzione della situazione richiede **minuti di macchina**, non settimane. Gli unici delay sono tecnici e dichiarati: tipo di scansione, profondità di crawler/scraper, volumi. Le "settimane" dei pacchetti commerciali sono **tempo di calendario** (accessi, contratti, validazione umana, restituzione) — il calcolo è minuti.
+
+Livelli di scansione (profondità = unico delay):
+
+| Livello | Nome | Tempo macchina | Cosa fa | Output |
+|---|---|---|---|---|
+| **L0** | Surface | 5-15 min | Crawl struttura, conteggi, tipologie pagine/documenti, carta d'identità del sistema | Mappa superficiale |
+| **L1** | Structural | 15-60 min | Estrazione entità/relazioni, grafo base, metriche di volume, anomalie strutturali (buchi, duplicati, rotture) | Screening |
+| **L2** | Deep / Evidential | 30 min - poche ore* | Parsing documenti (PDF/OCR), quadratura flussi, gate V1/V2 automatici, contraddizioni, benchmark | Audit draft |
+| **L3** | Continuous | schedulato | Delta-scan (solo cambiamenti), metriche, alert | Monitoraggio |
+
+\* L2 scala con i volumi (milioni di record, OCR massivo) e con i limiti imposti *dal sistema legacy stesso*: lo scraper deve rallentare per non disturbare l'esistente (rate limiting, fasce orarie). Ironia architetturale: **l'unico freno è il rispetto per il sistema che non vogliamo toccare.**
+
+Fattori di delay dichiarati al cliente (SLA tecnici, non settimane vaghe):
+
+```text
+n. pagine/record  ×  profondità crawl  ×  parsing (HTML vs PDF/OCR)  ×  chiamate modello (L2)
++ throttling legacy  +  latenza rete  =  tempo stimato prima di ogni scansione
+```
+
+Il sistema **stima e dichiara il tempo prima di partire** ("L1 stimata: 22 minuti") e lo rendiconta dopo. Anche il tempo è un claim verificabile.
+
+Cosa resta umano (e perché il calendario esiste ancora):
+
+1. **Accesso**: credenziali, VPN, permessi, liberatorie (giorni, non tecnica).
+2. **Perimetro**: cosa scansionare e cosa no (decisione contrattuale, ore).
+3. **Firma umana**: i finding critici (non conformità gravi) richiedono validazione prima della consegna — human-on-the-loop, non human-in-the-loop su tutto.
+4. **Restituzione**: riunione di lettura del report (il valore si consegna spiegandolo).
+
+Obiettivo commerciale: comprimere anche il processo con pacchetti prodottizzati (perimetro standard, accessi standard) fino a **"screening in giornata, audit in 48 ore"** di calendario.
+
+### Il meta-modello: entità e sub-entità (il motore è generico) 🟡
+
+Il verticale rifiuti è **un'istanza**, non il prodotto. Il sistema ragiona su un meta-modello indipendente dal dominio:
+
+```text
+Ecosystem            pack di configurazione (ontologia + connector + metriche + dashboard)
+ └── EntityType      tipi dichiarati nel pack (es. Produttore, Trasportatore, Impianto, Formulario)
+      └── Entity    istanza con identità stabile → PageRecord dedicato
+           └── SubEntity   parti componenti (mezzo, sede, documento, partita, contatore...)
+                └── Attribute / Relation / Flow / Event
+```
+
+Regole del meta-modello:
+
+1. **Tutto ha identità**: ogni entità e sub-entità è indirizzabile (entity → `registryId` proprio; sub-entità → `registryId` padre + fragment stabile).
+2. **Relazioni tipizzate**: il pack dichiara i tipi di relazione ammessi (`trasporta`, `conferisce_a`, `documentato_da`...); relazioni fuori ontologia = anomalia segnalata, non errore silenzioso.
+3. **Flussi = relazioni con quantità e tempo**: volumi, importi, date. La quadratura (carichi ≈ scarichi ± giacenze) è un check generico sui flussi, non logica del dominio rifiuti.
+4. **Documenti = evidenza**: ogni attributo critico punta al documento/fonte (provenance ereditata dal PageRecord).
+5. **Estensione senza Kernel**: il meta-modello vive in `props.epistemic` del PageRecord (namespace riservato), non in nuovi campi Foundation — la Foundation resta chiusa:
+
+```ts
+props: {
+  epistemic: {
+    ecosystem: "rifiuti",          // quale pack
+    entityType: "trasportatore",    // tipo da ontologia pack
+    parentId: "reg-...",            // per sub-entità (opzionale)
+    relations: [{ type: "conferisce_a", target: "reg-...", weight: 12.4, unit: "t", at: "2026-08-14" }],
+    confidence: 0.86,               // scomposta nel claim ledger
+    packVersion: "0.3.0"
+  }
+}
+```
+
+### Ecosystem Pack: il verticale come configurazione 🟡
+
+Coerente con *"applications are configuration"*: un nuovo ecosistema = un pack, non nuovo codice.
+
+Contenuto standard di un pack:
+
+```text
+packs/<ecosistema>/
+  ontology.yaml        entity/sub-entità, relazioni ammesse, attributi critici
+  connectors.yaml      profili di connessione read-only (HTML, DB, API, PDF, fogli)
+  metrics.yaml         definizioni dichiarative (formule, soglie, pesi)
+  dashboards.yaml      quali viste standard attivare (Sankey, grafo, cruscotto)
+  benchmarks.yaml      set comparativi (settore, territorio, storico)
+  compliance.yaml      checklist normative (es. RENTRI per rifiuti)
+  queries.yaml         query NL parametrizzate ("trovami i bisogni di {settore}")
+```
+
+### Altri ecosistemi candidati (stesso motore, nuovo pack) 🟡
+
+| Ecosistema | Entità tipiche | Driver normativo/mercato | Perché dopo i rifiuti |
+|---|---|---|---|
+| **Agroalimentare** | Produttori, lotti, trasformatori, certificazioni DOP/IGP, distributori | Farm-to-fork UE, tracciabilità, frodi alimentari | Sicilia fortissima; tracciabilità = stesso pattern dei rifiuti |
+| **Energia / CER** | POD, prosumer, impianti, incentivi, bollette | Comunità Energetiche Rinnovabili, direttiva RED III | Tema caldissimo, dati frammentati, bisogno di chiarezza |
+| **Logistica / supply chain** | Spedizioni, vettori, magazzini, dogane | Due diligence CSDDD, Digital Product Passport | Flussi fisici = stesso motore di quadratura |
+| **Turismo-culturale** | Beni, itinerari, operatori, flussi visitatori | Fondi territoriali, destagionalizzazione | Sinergia con enti locali siciliani |
+| **PA / servizi** | Pratiche, uffici, tempi, istanze | Trasparenza, PNRR, AI Act | Il cliente istituzionale che apre i bandi |
+
+Criterio di scelta del secondo pack: stesso pattern (flussi fisici + documenti + compliance), interlocutore terzo disponibile, driver normativo attivo.
+
+## 2. Il caso pilota: piattaforma rifiuti
+
+### 2.1 Contesto del dominio
+
+Gestione rifiuti = complessità normativa + operativa ideale per dimostrare valore:
+
+- **Attori**: produttori, trasportatori, intermediari, impianti di destino, enti di controllo.
+- **Documenti/flussi**: formulari (FIR), registri carico/scarico, MUD, codici EER/CER, autorizzazioni Albo Gestori, contratti, fatture.
+- **Compliance calda**: RENTRI (Registro Elettronico Nazionale Tracciabilità Rifiuti) — la digitalizzazione obbligatoria della tracciabilità rende ogni operatore affamato di chiarezza sui propri dati.
+- **Sistemi tipici**: gestionali datati, portali regionali, Excel, carta digitalizzata. Esattamente il "vecchio sito complesso" della simulazione.
+
+### 2.2 Query epistemiche (il "linguaggio" in azione)
+
+La simulazione ha validato query del tipo:
+
+- *"Trovami i bisogni che emergono da questa piattaforma/settore"* → bisogni latenti desunti dai flussi reali, non dichiarati.
+- *"Dove si accumulano ritardi tra carico e scarico?"* → colli di bottiglia operativi.
+- *"Quali CER/gestori generano più anomalie documentali?"* → risk screening.
+- *"Come siamo messi rispetto al benchmark di settore?"* → posizionamento.
+- *"Cosa manca per essere RENTRI-ready?"* → gap analysis compliance.
+
+Ogni risposta deve portare con sé: fonti (quali record), assunzioni (cosa si è dato per buono), verifiche (cosa si è controllato), e cosa resta incerto.
+
+### 2.3 Output: le 4 linee di offerta
+
+| Linea | Contenuto | Formato | Valore per il cliente |
+|---|---|---|---|
+| **Screening** | Fotografia iniziale: entità, flussi, volumi, anomalie evidenti | Report + dashboard | "Finalmente vedo il mio sistema" |
+| **Audit** | Verifica approfondita: conformità documentale, coerenza carichi/scarichi, gap RENTRI | Report certificabile + checklist | Riduzione rischio sanzioni |
+| **Benchmark** | Confronto con settore/territorio/serie storiche | Dashboard comparativa | Posizionamento competitivo |
+| **Monitoraggio** | Metriche continue, alert su anomalie e derive | Experience continuativa (abbonamento) | Controllo permanente |
+
+Le prime tre sono **progetti una tantum** (vendita facile, prezzo chiaro); il monitoraggio è **ricorrente** (il vero business). Sequenza di vendita naturale: Screening → Audit → Monitoraggio.
+
+## 3. Il metodo: ricerca epistemologica con step di arresto
+
+Questa è la parte metodologica che rende il lavoro difendibile, ripetibile e diversa da "un consulente con Excel". Pipeline canonica:
+
+```text
+1. ASSUNZIONI    esplicita cosa dai per buono (fonti complete? dati attendibili? perimetro?)
+        ↓
+2. EVIDENZA      raccogli dai sistemi esistenti via connector (ogni item → PageRecord con provenance)
+        ↓
+3. ANALISI       screening, metriche, grafo, pattern, anomalie
+        ↓
+4. VERIFICA      due gate obbligatori (vedi sotto)
+        ↓
+5. ARRESTO       stopping rule: quando smettere di approfondire (vedi sotto)
+        ↓
+6. CLAIM         affermazione finale con: fonti + assunzioni + verifiche + incertezza residua
+```
+
+### 3.1 I due gate di verifica (obbligatori)
+
+**Gate V1 — Verifica delle assunzioni.** Per ogni assunzione del passo 1: confermata / smentita / non verificabile. Le assunzioni smentite fanno ripartire l'analisi; quelle non verificabili diventano "incertezza dichiarata" nel claim finale. Mai assunzioni implicite.
+
+**Gate V2 — Verifica delle analisi.** Controlli incrociati: quadratura (carichi ≈ scarichi ± giacenze?), coerenza temporale, outlier review (le 10 anomalie più grandi riviste una a una), confronto con fonte indipendente quando esiste.
+
+### 3.2 Step di arresto (stopping rules)
+
+La ricerca si ferma quando si verifica **una** di queste condizioni (dichiarata nel report):
+
+1. **Saturazione**: nuove fonti non cambiano più le conclusioni (soglia: <5% variazione metriche chiave).
+2. **Soglia di confidenza**: tutte le metriche chiave sopra la confidenza target (es. ≥0.80) o con incertezza dichiarata e accettata.
+3. **Budget**: tempo/fonti esauriti → il report dichiara cosa resta aperto (meglio un perimetro dichiarato che un'analisi infinita).
+4. **Escalation**: emergenza di un finding critico (es. non conformità grave) → stop, segnalazione immediata, poi si riparte.
+
+### 3.3 Claim ledger (registro delle affermazioni)
+
+Ogni affermazione consegnata al cliente ha una scheda:
+
+```text
+Claim: "Il 12% dei formulari presenta anomalie documentali"
+Fonti: [registryId...] (n=1.240 record, periodo, sistemi)
+Assunzioni: A1 confermata, A2 non verificabile (dichiarata)
+Verifiche: V1 superato, V2 superato (outlier rivisti: 10/10)
+Confidenza: 0.86 (scomposta: copertura 0.9, accordo fonti 0.85, freschezza 0.8)
+Incertezza residua: "i dati cartacei pre-2023 non sono inclusi"
+```
+
+Questo è ciò che nessun competitor artigianale produce. Ed è esattamente ciò che la PA e i revisori vogliono vedere.
+
+## 4. Grafo della conoscenza: costruzione e rappresentazione
+
+### 4.1 Costruzione (desunta, non disegnata a mano)
+
+Il grafo emerge dai dati, non da un'ontologia imposta a priori:
+
+- **Nodi**: soggetti (produttori, trasportatori, impianti), documenti (formulari, registri, MUD), luoghi, mezzi, codici EER, autorizzazioni.
+- **Archi**: "trasporta", "conferisce a", "documentato da", "autorizzato da", "fatturato in", con pesi (volumi, frequenze) e timestamp.
+- **Arricchimento epistemico**: ogni arco porta provenance + confidenza; archi in conflitto (due fonti diverse) marcati ed evidenziati, mai fusi silenziosamente.
+
+### 4.2 Rappresentazione grafica (il prodotto visibile)
+
+La grafica non è decorazione: è il linguaggio con cui il cliente "vede" il proprio sistema:
+
+- **Mappa dei flussi**: Sankey carichi → trasporti → scarichi (dove va la materia).
+- **Rete dei soggetti**: grafo interattivo produttori-trasportatori-impianti (chi dipende da chi).
+- **Timeline anomalie**: serie temporali con outlier evidenziati e drill-down alla fonte.
+- **Cruscotto metriche**: volumi, tempi medi carico→scarico, tassi di anomalia, copertura documentale, RENTRI-readiness score.
+- **Confronto benchmark**: radar/barre vs medie di settore o vs periodi precedenti.
+
+Regola: **ogni elemento visuale è cliccabile fino alla fonte** (dalla barra del grafico al PageRecord al documento originale). Questa è la "citazione" del mondo non-AI, e vale quanto le citazioni RAG.
+
+## 5. Offerta commerciale (bozza)
+
+### 5.1 Pacchetti
+
+| Pacchetto | Durata indicativa | Contenuto | Modello prezzo |
+|---|---|---|---|
+| Screening | 2-4 settimane | Connessione read-only, fotografia, top-10 finding, demo grafo | Forfait (entry, prezzo aggressivo) |
+| Audit | 4-8 settimane | Screening + verifiche V1/V2, claim ledger, gap RENTRI, report | Forfait (core) |
+| Benchmark | 2-3 settimane (add-on) | Comparative set + posizionamento | Add-on |
+| Monitoraggio | Continuativo | Dashboard live, alert, report trimestrali | Abbonamento annuale |
+
+### 5.2 Argomenti di vendita (quelli che chiudono)
+
+1. **"Lo vedete funzionare oggi pomeriggio"** — screening L1 lanciato in demo, risultati prima di sera. Nessun competitor fa questo.
+2. "Non tocchiamo il vostro sistema" (read-only, zero rischio).
+3. "Ogni numero è tracciato alla fonte" (difendibilità verso revisori/enti).
+4. "RENTRI sta arrivando: vi diciamo quanto siete pronti" (urgenza normativa).
+5. "Il pilota riuscito su piattaforma complessa" (la simulazione = case study, appena arriva il feedback).
+
+### 5.3 Il feedback atteso: come usarlo
+
+Quando arriva il feedback di chi ha letto la simulazione:
+- Se positivo → diventa **lettera di referenza / caso studio** (chiedere il permesso di citare, anche anonimo: "piattaforma regionale gestione rifiuti, N documenti analizzati").
+- Se critico → è oro: ogni obiezione è una riga di roadmap ("ci hanno chiesto X, ora lo facciamo").
+- In ogni caso → chiedere **il passo successivo**: "possiamo farlo sui vostri dati reali in read-only per 3 settimane?" Lo screening pilota pagato (anche simbolico) è l'obiettivo.
+
+## 6. Fit con i bandi (questo verticale apre porte nuove)
+
+Il verticale rifiuti non è solo commerciale: apre il **Green Deal**, un filone separato da quello digitale:
+
+- **Horizon Cluster 6** (ambiente, bioeconomia) + temi **circular economy**: tracciabilità dei flussi di materia = economia circolare misurabile.
+- **Digital Product Passport / ESPR**: la tracciabilità dei materiali è esattamente la direzione UE.
+- **Nazionale/PNRR**: Missione 2 (rivoluzione verde), RENTRI come driver normativo.
+- Il pitch diventa: *"digital sovereignty meets circular economy: European-governed knowledge over strategic material flows."*
+
+## 7. Strumenti da costruire (build order) e prossimi passi 🔴
+
+Ordine di costruzione (ogni strumento sblocca il successivo; nessuno tocca il Kernel):
+
+| # | Strumento | Fa | Sblocca |
+|---|---|---|---|
+| 1 | **Connector framework** | Profili read-only riusabili (HTTP crawl, DB read replica, API, PDF/OCR, CSV/Excel) con throttling e audit | Qualsiasi scansione reale |
+| 2 | **Entity extractor** | Da pagine/record/documenti → entità e sub-entità tipizzate secondo `ontology.yaml` (+ confidence per estrazione) | Il popolamento |
+| 3 | **Graph builder** | Da entità/relazioni → grafo pesato con provenance e marcatura conflitti | Le visualizzazioni |
+| 4 | **Metric engine** | Da `metrics.yaml` → calcolo dichiarativo, quadrature, soglie, serie | Screening/Audit |
+| 5 | **Viz kit** | Sankey flussi, grafo soggetti, cruscotto metriche, timeline — standard e riusabili | La "vista" del cliente |
+| 6 | **Report engine** | Template assunzioni → evidenza → verifiche → arresto → claim ledger (PDF + pagina navigabile) | Il deliverable firmabile |
+| 7 | **Query NL** | "Trovami i bisogni di {settore}" → traduzione in interrogazioni su grafo+metriche con citazioni | L'interfaccia in linguaggio naturale |
+
+Nota: la query in linguaggio naturale è **ultima**, non prima — senza grafo e metriche solide risponderebbe sul vuoto. L'ordine sopra è anche un piano di milestone da bando (ogni riga = deliverable).
+
+### Checklist
+
+- [ ] Raccogliere e classificare il feedback sulla simulazione (referenza? obiezioni? passo successivo?)
+- [ ] Protocollo terzo interlocutore: 5 domande strutturate + richiesta lettera di interesse (oro per bandi)
+- [ ] Scegliere il secondo ecosistema candidato (stesso pattern, driver attivo)
+- [ ] Formalizzare il connector read-only generico (primo provider "legacy" riusabile)
+- [ ] Costruire 2-3 visualizzazioni standard riuscibili (Sankey flussi, grafo soggetti, cruscotto metriche)
+- [ ] Scrivere il template di report (assunzioni → verifiche → arresto → claim ledger)
+- [ ] Definire il pacchetto Screening: perimetro fisso, prezzo fisso, durata fissa (prodottizzare!)
+- [ ] Cercare 2-3 candidati per screening pilota su dati reali (anche via rete esistente P.IVA)
+- [ ] Benchmark dei tempi: misurare L0/L1/L2 sul caso rifiuti e pubblicare la tabella ("22 minuti per 1.240 record") — è materiale commerciale e da bando

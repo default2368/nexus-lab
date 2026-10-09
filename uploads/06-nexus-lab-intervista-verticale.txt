@@ -1,0 +1,109 @@
+# Nexus Lab — Protocollo di intervista per test verticale
+
+> USO INTERNO — non condividere con gli interlocutori.
+> Obiettivo: in 45-60 minuti, capire se il dominio è un buon "pack" e raccogliere materiale per simularlo.
+> Regole: ascoltare più che spiegare (70/30) · non mostrare internals del Kernel · non promettere date · se si parla di dati reali, proporre NDA.
+
+---
+
+## Struttura del colloquio (45-60 min)
+
+| Fase | Tempo | Obiettivo |
+|---|---|---|
+| 1. Contesto | 10' | Ruolo, organizzazione, perimetro di responsabilità |
+| 2. Sistemi e dati | 15' | Dove vivono i dati, in che forma, chi li tocca |
+| 3. Dolori e bisogni | 15' | Le domande senza risposta, i colli di bottiglia |
+| 4. Compliance e rischi | 10' | Norme, audit, cosa fa paura |
+| 5. Chiusura | 5-10' | Pilota? Dati campione? Rete? Lettera di interesse? |
+
+---
+
+## A. Domande per G. (farmaceutico / qualità / QC / regulatory)
+
+### A1. Contesto
+- In che tipo di azienda opera (produzione API, finito, CMO, consulenza)? Dimensione indicativa?
+- Quali aree ha seguito direttamente: QC, QA, produzione, regulatory CMC, audit?
+- Oggi da freelance: che servizi offre e a che tipo di clienti?
+
+### A2. Sistemi e dati (mappa delle fonti)
+- Quali sistemi ha visto in uso: LIMS, ERP (SAP?), QMS/eQMS, DMS documentale, MES, fogli Excel, carta?
+- Dove si inceppa il flusso informativo? (es. dati QC in un sistema, deviazioni in un altro, batch record in un terzo)
+- Quanti dati vivono ancora in Excel non validati o in carta?
+- Chi deve mettere insieme i pezzi quando serve una risposta trasversale? Quanto tempo ci vuole?
+- **Domanda chiave**: *"Se dovesse rispondere a 'tutte le deviazioni legate al fornitore X negli ultimi 2 anni, con esiti e tempi di chiusura' — quanto tempo serve e quanti sistemi bisogna aprire?"*
+
+### A3. Dolori e bisogni (le query che vorrebbe fare)
+- Quali domande ricorrenti richiedono oggi ore/giorni di raccolta manuale? (top 3)
+- Preparazione audit/ispezioni (AIFA/EMA/FDA): quanto tempo per raccogliere l'evidenza? Cosa si trova sempre all'ultimo momento?
+- OOS/OOT, deviazioni, CAPA: come si misurano tempi di chiusura, recidive, aging? Esistono KPI o si va a sensazione?
+- Change control e stability: dove si perdono le informazioni?
+- Supplier qualification e audit fornitori: come si tiene il quadro d'insieme?
+- **Domanda chiave**: *"Se avesse una lente sopra tutti i suoi sistemi che risponde in minuti — le prime 3 domande che le farebbe?"*
+
+### A4. Compliance e rischi (il driver)
+- Data integrity (ALCOA+) e Annex 11 / 21 CFR Part 11: quanto pesano i vincoli sui sistemi computerizzati?
+- Nota interna: il nostro overlay è **read-only e non modifica i sistemi GxP** → impatto di convalida minimo. Testare la reazione: *"se lo strumento non tocca i sistemi validati ma li legge soltanto, cambia qualcosa dal punto di vista compliance?"*
+- Cosa fa più paura: un'ispezione senza evidenze pronte? Una deviazione recidiva non vista? Una scadenza?
+- Metriche che un ispettore chiede sempre e che oggi sono faticose da produrre?
+
+### A5. Chiusura (l'orbita)
+- Esiste un sotto-perimetro "sicuro" su cui fare uno screening dimostrativo? (dati anonimizzati, area non-GMP, storico chiuso)
+- Conosce 1-2 QA/QC manager che hanno lo stesso problema? (rete)
+- Disponibile a una lettera di interesse non vincolante se il test convince? (oro per bandi)
+- Feedback sulla presentazione: cosa non torna, cosa manca, cosa la incuriosisce?
+
+---
+
+## B. Domande per A. (legale + software gestione rifiuti)
+
+### B1. Feedback sulla lettura nexus-style (priorità 1)
+- Cosa ha capito del documento? Cosa le è sembrato utile, cosa superfluo?
+- Quali affermazioni vorrebbe verificate su dati reali?
+- Cosa manca per farlo vedere al suo team / a un cliente?
+- Autorizza a citarlo come caso di studio (anche anonimo: "piattaforma gestione rifiuti, N documenti")?
+
+### B2. Il software del suo team (mappa da completare)
+- Architettura e dati: gestionale proprietario? DB? Portali? Integrazioni con FIR/MUD/RENTRI?
+- Utenti tipici e loro lamentele ricorrenti.
+- Hanno già analytics/reportistica? Cosa non riescono a rispondere oggi?
+- Roadmap: cosa stanno costruendo nei prossimi 6-12 mesi? (dove potremmo incastrarci come modulo, non come concorrenti)
+
+### B3. Versante legale (secondo verticale possibile)
+- Nel lavoro di studio: quali attività divorano tempo? (due diligence, ricerca, fascicoli complessi, scadenze)
+- Ha mai desiderato una "lente" sopra un fascicolo di migliaia di pagine?
+- Clienti con sistemi complessi da leggere (M&A, contenziosi ambientali, compliance)?
+
+### B4. Chiusura
+- Pilota read-only su un perimetro limitato: sì/no/condizioni?
+- Rete: altri avvocati/aziende con lo stesso bisogno?
+- Lettera di interesse se il pilota convince?
+
+---
+
+## C. Dopo il colloquio: scheda verticale (compilare entro 24h)
+
+```text
+Verticale: ............
+Interlocutore: ............ (ruolo, data)
+Entità candidate (5-10): ............
+Sub-entità: ............
+Fonti dati (sistemi + formati): ............
+Top 3 query senza risposta: 1) ... 2) ... 3) ...
+Driver normativo: ............
+KPI di dominio: ............
+Perimetro pilota possibile: ............
+Disponibilità (dati/rete/lettera): ............
+Red flag: ............
+Prossimo passo + data: ............
+```
+
+---
+
+## D. Confini: cosa NON dire / NON fare
+
+- ❌ Non mostrare codice, architettura interna, nomi di componenti Kernel.
+- ❌ Non promettere date di rilascio né funzionalità specifiche.
+- ❌ Non nominare altri interlocutori senza permesso.
+- ❌ Non ricevere dati reali senza NDA firmato.
+- ✅ Sì a: metodo, garanzie, tempi indicativi, casi simulati, roadmap per linee.
+- ✅ Dichiarare onestamente lo stato: startup in costituzione, strumenti in sviluppo, ipotesi da validare — la trasparenza con esperti di dominio paga più dell'hype.

@@ -1,0 +1,69 @@
+# Nexus Lab — Presentazione del progetto
+
+> Documento di presentazione esterna — versione 0.1, settembre 2026
+> Destinatari: interlocutori di dominio (es. A., G.), potenziali partner e clienti pilota.
+
+---
+
+## 1. Il problema
+
+Ogni organizzazione matura vive sopra **sistemi informativi stratificati nel tempo**: gestionali datati, portali, fogli di calcolo, documenti, banche dati non comunicanti. La conoscenza operativa esiste, ma è **frammentata, opaca e difficile da interrogare**.
+
+Le risposte tradizionali sono due, entrambe costose:
+
+- **Sostituire tutto** — progetti lunghi, rischiosi, spesso fallimentari ("e se toccandolo si rompe?");
+- **Rassegnarsi** — analisi manuali, Excel, ore-uomo per rispondere a domande che i dati potrebbero rispondere da soli.
+
+## 2. La soluzione: capire senza sostituire
+
+**Nexus Lab** sviluppa **OpenNexus**, una piattaforma che costruisce un **livello interpretativo sopra i sistemi esistenti, senza modificarli**:
+
+- si collega **in sola lettura** (read-only) a gestionali, portali, documenti e basi dati;
+- **ricostruisce il linguaggio del dominio**: entità, relazioni, flussi, metriche — ciò che il sistema "sa" ma non sa dire;
+- risponde a domande in linguaggio naturale (*"quali bisogni emergono da questa piattaforma?"*, *"dove si accumulano i ritardi?"*, *"quanto siamo pronti per la compliance X?"*);
+- **ogni numero è tracciato alla fonte**: dal grafico al documento originale, con assunzioni esplicite, verifiche dichiarate e incertezza residua.
+
+In sintesi: *il sistema esistente continua a lavorare, noi lo rendiamo leggibile e interrogabile.*
+
+## 3. Come funziona (in 4 passi)
+
+1. **Connessione** — accesso read-only concordato (nessuna installazione invasiva, nessun fermo operativo).
+2. **Estrazione** — ricostruzione di entità e relazioni: soggetti, documenti, flussi, scadenze, anomalie.
+3. **Analisi e verifica** — screening, metriche, confronti, controlli di coerenza; metodo verificabile con doppio controllo (assunzioni + analisi) e criteri di arresto dichiarati.
+4. **Rappresentazione** — dashboard, grafi della conoscenza, report con ogni affermazione tracciata alle fonti.
+
+I tempi di elaborazione sono dell'ordine di **minuti/ore** a seconda della profondità di analisi, non settimane.
+
+## 4. Cosa produce
+
+| Servizio | Contenuto |
+|---|---|
+| **Screening** | Fotografia iniziale: cosa contiene il sistema, top finding, mappa visuale |
+| **Audit** | Verifica approfondita: coerenza, anomalie, gap normativi, report tracciabile |
+| **Benchmark** | Confronto con settore, territorio o serie storiche |
+| **Monitoraggio** | Controllo continuativo con alert e report periodici |
+
+## 5. Garanzie
+
+- **Sovranità e riservatezza**: iniziativa italiana, dati trattati in UE, accordi di riservatezza (NDA) disponibili prima di qualsiasi accesso.
+- **Zero rischio operativo**: accesso in sola lettura, nessuna modifica ai sistemi esistenti.
+- **Nessun lock-in**: standard aperti di interscambio, esportazione completa di dati e analisi.
+- **Metodo verificabile**: assunzioni esplicite, verifiche documentate, ogni affermazione collegata alle fonti.
+
+## 6. Ambiti di applicazione
+
+Il metodo è indipendente dal dominio; i primi ambiti in esplorazione:
+
+- **Ambiente e rifiuti** — tracciabilità dei flussi, coerenza documentale, readiness normativa (caso simulato disponibile).
+- **Legale e compliance** — lettura strutturata di pratiche, contratti, scadenze, fascicoli complessi.
+- **Qualità e farmaceutico** — deviazioni, CAPA, audit readiness, metriche di qualità (in esplorazione con esperti di settore).
+
+## 7. Cosa proponiamo
+
+Un confronto di **45 minuti** per capire se esiste un caso concreto, seguito — se c'è interesse reciproco — da uno **screening pilota su dati reali in sola lettura** (perimetro concordato e limitato, risultati in giorni).
+
+**Contatti:** [nome] · [email @open-nexus.io] · [telefono] · open-nexus.io
+
+---
+
+*Documento informativo non vincolante. I dettagli tecnici della piattaforma sono coperti da privativa in corso di definizione.*

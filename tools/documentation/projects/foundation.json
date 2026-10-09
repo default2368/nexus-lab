@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "projectId": "open-nexus-foundation",
+  "repositoryId": "default2368/open-nexus-foundation",
+  "defaultBranch": "master",
+  "remoteName": "origin",
+  "requiredRemotePath": "default2368/open-nexus-foundation.git",
+  "baselineRefs": [
+    "v0.8.1"
+  ],
+  "requireBaselineRefs": true,
+  "documentRoots": [
+    "docs"
+  ],
+  "includeFiles": [
+    "README.md",
+    "AGENTS.md"
+  ],
+  "extensions": [
+    ".md",
+    ".mdx",
+    ".txt"
+  ],
+  "excludeGlobs": [
+    ".git/**",
+    "node_modules/**",
+    "build/**",
+    "coverage/**",
+    "dist/**",
+    "out/**",
+    "target/**",
+    ".cache/**",
+    ".cloned-open-nexus-*/**",
+    ".prov-worktrees/**",
+    "docs/archive/source-snapshots/**"
+  ],
+  "maxFileBytes": 2097152
+}

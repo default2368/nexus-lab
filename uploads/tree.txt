@@ -1,0 +1,122 @@
+.
+├── applications
+│   ├── auth.ts
+│   ├── core-admin.ts
+│   ├── factory.ts
+│   ├── index.ts
+│   ├── open-nexus.ts
+│   ├── simple.ts
+│   ├── system.ts
+│   └── types.ts
+├── constants
+│   └── index.ts
+├── debug.ts
+├── discovery
+│   ├── page-registry
+│   │   ├── backups
+│   │   │   ├── ai-generate.ts.deprecated
+│   │   │   ├── core.ts.backup.2026-01-23T17-32-37
+│   │   │   └── lifecycle.ts.backup.2026-01-23T17-32-38
+│   │   ├── index.ts
+│   │   └── pages
+│   │       ├── auth.ts
+│   │       ├── core-admin
+│   │       │   └── index.ts
+│   │       ├── hub.ts
+│   │       ├── open-nexus
+│   │       │   └── index.ts
+│   │       ├── simple
+│   │       │   └── simple-pages.ts
+│   │       ├── sys
+│   │       │   ├── core.ts
+│   │       │   └── tools.ts
+│   │       └── welcome.ts
+│   ├── policies.ts
+│   ├── providers
+│   │   ├── fs-provider.ts
+│   │   ├── index.ts
+│   │   ├── redis-provider.ts
+│   │   └── virtual-provider.ts
+│   ├── README.md
+│   ├── template-manager.ts
+│   └── utils.ts
+└── navigation.ts
+
+12 directories, 31 files
+.
+├── auth
+│   ├── assets
+│   │   └── README.md
+│   ├── package.ts
+│   └── pages
+│       ├── callback.ts
+│       ├── change-password.ts
+│       ├── forgot-password.ts
+│       ├── index.ts
+│       ├── login.ts
+│       ├── signup.ts
+│       ├── success.ts
+│       ├── user-info.ts
+│       └── welcome.ts
+├── build-manifest.ts
+├── build-report.ts
+├── bundle-collector.ts
+├── core-admin
+│   ├── assets
+│   │   └── README.md
+│   ├── package.ts
+│   └── pages
+│       ├── dashboard.ts
+│       ├── hello-api.ts
+│       ├── hub.ts
+│       ├── index.ts
+│       └── redis-console.ts
+├── index.ts
+├── open-nexus
+│   ├── assets
+│   │   ├── astronaut.jpg
+│   │   ├── knowledge-graph.svg
+│   │   ├── page_spec.png
+│   │   └── README.md
+│   ├── package.ts
+│   ├── pages
+│   │   ├── about.ts
+│   │   ├── architecture.ts
+│   │   ├── assistant.ts
+│   │   ├── generated-knowledge.ts
+│   │   ├── home.ts
+│   │   ├── index.ts
+│   │   ├── library.ts
+│   │   ├── login.ts
+│   │   ├── manifest6.ts
+│   │   ├── not-found.ts
+│   │   ├── profile.ts
+│   │   ├── runtime.ts
+│   │   └── topics.ts
+│   └── presentation.manifest.ts
+├── README.md
+├── simple
+│   ├── assets
+│   │   ├── images
+│   │   │   ├── openfav-content-1.svg
+│   │   │   ├── openfav-content-2.svg
+│   │   │   └── openfav-hero.svg
+│   │   └── README.md
+│   ├── package.ts
+│   ├── pages
+│   │   ├── about-legacy.ts
+│   │   ├── about.ts
+│   │   ├── assistant.ts
+│   │   ├── documentation.ts
+│   │   ├── index.ts
+│   │   └── welcome.ts
+│   └── presentation.manifest.ts
+├── system
+│   ├── assets
+│   │   └── README.md
+│   ├── package.ts
+│   └── pages
+│       └── index.ts
+└── types.ts
+
+17 directories, 58 files

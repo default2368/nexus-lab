@@ -1,0 +1,315 @@
+# Nexus / Prometeo — Brain, workflow e network
+
+**Data:** 2026-09-15  
+**Stato:** ipotesi strategica / possibile spin-off verticale  
+**Collegamenti:** `25-SCANSIONE-PROMETEO-RIFIUTI.md`, metodo Foundation/X
+
+## 1. Correzione di scala
+
+La possibile opportunità non è soltanto realizzare una knowledge experience per il sito di Prometeo.
+
+La sonda potrebbe diventare un sistema verticale composto da:
+
+```text
+conoscenza di dominio
+  → capacità Brain riutilizzabili
+  → regole di workflow
+  → algoritmi di interpretazione
+  → esperienze per ruolo
+  → network operativo
+```
+
+Questo cambia la natura dell’operazione:
+
+- non solo sito;
+- non solo contenuto;
+- non solo chatbot;
+- non solo integrazione;
+- ma un **ecosistema funzionale condiviso** sopra una base di conoscenza e workflow verificabili.
+
+## 2. Brain come risorsa riutilizzabile
+
+Le capacità Brain non devono restare nascoste in prompt o implementazioni isolate.
+
+Devono essere registrate come risorse versionate e riutilizzabili:
+
+```text
+Brain Capability
+├── id
+├── nome
+├── dominio
+├── scopo
+├── input richiesti
+├── trasformazione
+├── output
+├── fonti ammesse
+├── regole applicate
+├── modello / algoritmo
+├── livello di determinismo
+├── confidenza
+├── condizioni di errore
+├── revisore umano
+├── versione
+├── applicazioni compatibili
+└── evidenze di validazione
+```
+
+Esempi:
+
+- `BRAIN-001` estrai obblighi da una fonte normativa;
+- `BRAIN-002` confronta una scadenza con un’autorizzazione;
+- `BRAIN-003` rileva incongruenze tra registro e formulario;
+- `BRAIN-004` produce un dossier con fonti;
+- `BRAIN-005` classifica una richiesta per ruolo e workflow;
+- `BRAIN-006` aggiorna le viste dipendenti da una norma modificata.
+
+Una risorsa Brain non è necessariamente un modello AI. Può essere:
+
+- regola deterministica;
+- parser;
+- query;
+- algoritmo;
+- prompt governato;
+- sequenza di agenti;
+- workflow umano;
+- combinazione di questi elementi.
+
+## 3. Workflow Contract
+
+Le capacità Brain devono essere invocate dentro workflow espliciti.
+
+```text
+trigger
+  → raccolta input
+  → validazione
+  → interpretazione
+  → proposta
+  → revisione umana
+  → approvazione
+  → pubblicazione / azione
+  → audit
+```
+
+Ogni workflow dovrebbe definire:
+
+- chi lo avvia;
+- quali dati può leggere;
+- quali condizioni deve verificare;
+- quali stati attraversa;
+- quando si arresta;
+- quale output produce;
+- chi approva;
+- quale evidenza conserva;
+- cosa succede se la fonte è incompleta o contraddittoria.
+
+Esempio:
+
+```text
+Nuovo decreto RENTRI
+  → acquisizione fonte
+  → estrazione modifiche
+  → confronto con regole precedenti
+  → proposta di aggiornamento
+  → revisione esperto
+  → aggiornamento contenuti
+  → elenco pagine e workflow impattati
+```
+
+## 4. Algoritmi di interpretazione
+
+La piattaforma deve separare tre livelli:
+
+### Dato osservato
+
+- testo della fonte;
+- documento;
+- data;
+- registrazione;
+- valore numerico;
+- stato del sistema.
+
+### Interpretazione
+
+- classificazione;
+- relazione;
+- anomalia;
+- conseguenza possibile;
+- livello di confidenza.
+
+### Decisione
+
+- azione proposta;
+- approvazione;
+- rifiuto;
+- pubblicazione;
+- escalation a un esperto.
+
+```text
+dato ≠ interpretazione ≠ decisione
+```
+
+Questo è il punto in cui OpenNexus può applicare il proprio principio di determinismo:
+
+- regole e controlli espliciti dove possibile;
+- AI assistita dove serve interpretazione;
+- confidenza e fonti sempre visibili;
+- approvazione umana per gli output sensibili.
+
+## 5. Network potenziale
+
+Il network Prometeo non è solo un insieme di utenti. È una catena di responsabilità:
+
+```text
+produttore
+  ↔ consulente / associazione
+  ↔ trasportatore
+  ↔ destinatario / impianto
+  ↔ recupero / smaltimento
+  ↔ autorità / normativa
+```
+
+Un ecosistema funzionale condiviso potrebbe offrire:
+
+- ontologia comune;
+- ruoli e permessi;
+- scambio selettivo di documenti;
+- conferme tra soggetti;
+- notifiche di stato;
+- dossier condivisi;
+- audit trail;
+- viste diverse dello stesso evento;
+- benchmark anonimi;
+- risorse Brain condivise;
+- workflow inter-organizzazione.
+
+### Regola di sicurezza del network
+
+Il network non deve implicare visibilità totale.
+
+Ogni relazione deve specificare:
+
+```text
+proprietario del dato
+scopo dell’accesso
+soggetto autorizzato
+durata
+campo visibile
+azione consentita
+traccia prodotta
+```
+
+Il network va costruito dopo un primo workflow verticale funzionante, non prima.
+
+## 6. Perché può giustificare uno spin-off
+
+Una singola knowledge experience per il sito può essere un progetto o un pilot.
+
+Uno spin-off sarebbe giustificato se esistesse una combinazione riutilizzabile di:
+
+1. risorse Brain di dominio;
+2. workflow regolamentati;
+3. algoritmi di interpretazione;
+4. esperienze per più ruoli;
+5. network di soggetti;
+6. evidenze e audit;
+7. integrazioni con sistemi transazionali;
+8. valore misurabile per più organizzazioni.
+
+La tesi dello spin-off sarebbe:
+
+> **Nexus fornisce il layer di conoscenza, interpretazione e workflow verificabile per un ecosistema verticale già esistente.**
+
+Prometeo potrebbe essere:
+
+- primo cliente;
+- design partner;
+- canale di distribuzione;
+- integratore;
+- partner verticale;
+- eventuale co-sviluppatore.
+
+Non si assume ancora quale ruolo ricoprirà.
+
+## 7. La persona A come segnale
+
+Il fatto che A abbia detto, in sostanza, “dai un’occhiata e vedi se rilevi bisogni” è un segnale utile, ma non è ancora validazione commerciale.
+
+Può indicare:
+
+- disponibilità all’esplorazione;
+- apertura verso una lettura esterna;
+- interesse per bisogni non ancora formalizzati;
+- possibile accesso a conoscenza del dominio;
+- possibile design partner.
+
+Il fatto che sia un avvocato può essere rilevante se la sua pratica è orientata a:
+
+- regolazione;
+- compliance;
+- ambiente;
+- responsabilità;
+- prova documentale;
+- trasformazione digitale;
+- consulenza operativa.
+
+La definizione “avvocato 2.0” è una buona ipotesi di interlocutore, ma non va trasformata in una categoria commerciale senza ascoltare il suo lavoro reale.
+
+## 8. Prima conversazione con A
+
+Non presentare subito OpenNexus come soluzione.
+
+Obiettivo: capire dove il lavoro oggi richiede conoscenza, interpretazione, coordinamento e prova.
+
+Domande:
+
+1. Quali informazioni devi raccogliere per assistere un cliente?
+2. Quali fonti sono autorevoli e quali soltanto indicative?
+3. Dove perdi più tempo nel trasformare documenti in un parere o in un’azione?
+4. Quali passaggi sono ripetuti per ogni cliente?
+5. Quali decisioni richiedono sempre un controllo umano?
+6. Quali errori sono più costosi o pericolosi?
+7. Come dimostri oggi da dove deriva una conclusione?
+8. Quali contenuti riusi tra clienti, casi e documenti?
+9. Quale workflow potrebbe essere standardizzato senza perdere il giudizio professionale?
+10. Quale risultato avrebbe abbastanza valore da giustificare un progetto o un acquisto?
+
+## 9. Prima implementazione possibile
+
+Non partire dal network completo.
+
+### Vertical Brain & Evidence Pilot
+
+```text
+una materia delimitata
+  → fonti autorizzate
+  → 3–5 capacità Brain
+  → workflow con revisione
+  → esperienza per un ruolo
+  → dossier / risposta / alert verificabile
+```
+
+Esempio:
+
+```text
+fonte normativa
+  → obblighi estratti
+  → soggetti e scadenze collegati
+  → impatto su contenuti e clienti
+  → proposta di aggiornamento
+  → revisione esperto
+  → pubblicazione tracciata
+```
+
+## 10. Limiti e cautele
+
+- non assumere che l’apertura di A equivalga a budget;
+- non usare dati o materiali riservati senza autorizzazione;
+- non trasformare interpretazioni legali in risposte automatiche;
+- non condividere dati tra aziende senza modello di autorizzazione;
+- non iniziare dal network se manca un workflow con valore singolo;
+- non promuovere Brain capability nel core prima di una seconda applicazione;
+- separare chiaramente dimostrazione tecnica, pilot e prodotto commerciale.
+
+## 11. Tesi provvisoria
+
+> **La vera opportunità non è aggiungere un chatbot al sito Prometeo. È costruire un ecosistema di capacità Brain, workflow e interpretazioni verificabili che renda riutilizzabile la conoscenza verticale e permetta a più ruoli del network di lavorare sullo stesso modello, con permessi, evidenze e responsabilità distinti.**
