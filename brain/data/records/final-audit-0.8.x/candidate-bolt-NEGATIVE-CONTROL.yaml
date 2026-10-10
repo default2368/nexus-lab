@@ -1,0 +1,60 @@
+# Candidate Domain Definition — bolt-new
+# Generated: 2026-10-09T18:58:05.278436
+# Source: /tmp/bolt.new/README.md
+# Status: INSUFFICIENT
+# Rule: Brain proposes, Human corrects, Authoring validates
+
+status: INSUFFICIENT
+domain:
+  id: bolt-new
+  title: Bolt New
+
+actors:
+  - id: manager
+    epistemicStatus: OBSERVED
+
+candidateEntities:
+  - id: feedback
+    epistemicStatus: OBSERVED
+
+candidateRelationships:
+
+sufficiency:
+  level: INSUFFICIENT
+  observed_count: 0
+  dimensions:
+    Purpose: UNKNOWN
+    Actors: UNKNOWN
+    Objects: UNKNOWN
+    Workflow: UNKNOWN
+    States: INFERRED
+    Decisions: UNKNOWN
+    Evidence: UNKNOWN
+    Relationships: UNKNOWN
+    Operations: INFERRED
+    Access: UNKNOWN
+    Exceptions: UNKNOWN
+    Examples: UNKNOWN
+    Provenance: UNKNOWN
+    Sensitivity: UNKNOWN
+
+gaps:
+  - Purpose: evidenza insufficiente per modellare purpose
+  - Actors: evidenza insufficiente per modellare actors
+  - Objects: evidenza insufficiente per modellare objects
+  - Workflow: evidenza insufficiente per modellare workflow
+  - Decisions: evidenza insufficiente per modellare decisions
+  - Evidence: evidenza insufficiente per modellare evidence
+  - Relationships: evidenza insufficiente per modellare relationships
+  - Access: evidenza insufficiente per modellare access
+
+assumptions:
+  - statement: States: interpretazione plausibile ma non canonica
+    epistemicStatus: INFERRED
+  - statement: Operations: interpretazione plausibile ma non canonica
+    epistemicStatus: INFERRED
+
+nextActions:
+  - Verificare K4: censimento incumbent (cosa fanno, cosa non fanno, cosa costano)
+  - Colloquio con esperto di dominio sulle 13 domande (bisogni e payer, non pitch)
+  - Produrre un caso sintetico completo con stati attraversati e approvazioni
