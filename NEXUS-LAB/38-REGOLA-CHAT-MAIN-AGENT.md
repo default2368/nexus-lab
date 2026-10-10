@@ -47,3 +47,54 @@ Mescolare binari → REJECTED fino a secondo caso
 
 ## Linguaggio
 Italiano, OSSERVATO/INFERITO/LIMITE, OBSERVED MARKET SIGNAL vs VALIDATED, formula onesta meccanismo promettente + workflow concreto + segnali coerenti → test buyer reale
+
+---
+
+## Aggiornamento 9/10 — Separate Documentation Agent (2026-10-09)
+
+**Voto:** 9/10 (Visione 9.5, Separazione 9.5, Context switching 9, Fattibilità 9, Provenance 9, Tempismo 9, Governance 7.5, Rischio duplicazione 7.5)
+
+**Modello operativo:**
+```
+conversazione (brainstorming, architettura, owner reasoning)
+→ documentation agent (estrae, formalizza)
+→ documentation Git repo (conserva versioni e review)
+→ owner (ratifica, corregge, rifiuta)
+→ technical repos (verità code-coupled)
+```
+
+**Ruoli:**
+- Johnn: co-founder/architect/PM → analizza, propone, identifica decisioni, produce handoff OWNER_DECISION_PENDING
+- Documentation Agent: redige, normalizza, controlla link/status, commit/push/PR
+- Owner: approva/respinge — unico gate promozione
+- Git: conserva fonte, revisioni, decisioni
+
+**OWNER_DECISION_PENDING handoff:**
+```yaml
+decisionId, title, scope, status: OWNER_DECISION_PENDING, observed, inferred, proposed, conflicting, unknown, limits, recommendedDecision, alternatives, consequences, implementationImpact, sourceConversationRef (conversationId, turn/range, date, source hash, extractor, target, approval status)
+```
+→ ADR/PRD/Epic/backlog/finding/decision record/evidence report → APPROVED/APPROVED_WITH_CONDITIONS/DEFERRED/REJECTED
+
+**Tre regole per 9.5/10:**
+1. conversazione non è authority canonica (raw → source evidence, approved ADR/PRD → governing authority)
+2. ogni documento conserva fonte (conversationId, turn, date, hash, extractor, target, approval status)
+3. nessuna promozione automatica (CANDIDATE → APPROVED → VERSIONED, merged ≠ canonical)
+
+**Corpus separation:**
+```
+sources/conversations/ → raw, not default Roy corpus
+docs/candidates/ → drafts
+docs/approved/ → ratified
+archive/ → superseded/rejected
+```
+
+**Sicurezza:** private repo, secret scan, PII classification, no auto public publication, no raw in default Brain retrieval, retention policy
+
+**DECIDED:**
+Separate Documentation Agent → APPROVED OPERATING DIRECTION
+Conversation Git repo → APPROVED AS SOURCE/REVIEW CONTROL PLANE
+Automatic authority promotion → PROHIBITED
+OWNER_DECISION_PENDING handoff → APPROVED
+Writing every document in this chat → no longer required
+
+Vedi NEXUS-LAB/39-OWNER-DECISION-PENDING-WORKFLOW.md
