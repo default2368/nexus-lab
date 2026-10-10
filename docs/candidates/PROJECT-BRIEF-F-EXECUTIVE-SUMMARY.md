@@ -8,6 +8,8 @@
 
 **Problema:** Molte attività professionali dipendono da documenti, procedure, evidenze e decisioni. Le informazioni esistono, ma sono frammentate, difficili da attraversare e ancora più difficili da ricostruire quando qualcuno deve spiegare chi ha deciso cosa, sulla base di quali fonti e secondo quale versione.
 
+**Premessa:** Documento generato con supporto AI, ma non hype AI. Contenuto deriva da sviluppo piattaforma sottostante (Foundation, Brain, Assistant, CLI, repeatability test). Uso Brain sorprendente: non output ChatGPT/Claude/Gemini, ma modello relativamente economico per produzione ipotesi/osservazioni/inferenze che riduce utilizzo a ratifica poche decisioni. Costi elaborazione massiva PDF/MD a carico cliente finale.
+
 **Proposta:** Costruire infrastruttura e strumenti che trasformino fonti documentate in applicazioni di conoscenza navigabili, verificabili e governabili.
 
 ```text

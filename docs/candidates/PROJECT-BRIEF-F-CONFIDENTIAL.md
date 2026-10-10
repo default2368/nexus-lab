@@ -34,6 +34,43 @@ Questa pagina distingue la dispensa da un documento mandato a freddo.
 
 ---
 
+## 2bis. Premessa — origine del documento e uso del Brain
+
+Questo documento è stato generato con supporto AI, ma non è il classico hype dell'intelligenza artificiale.
+
+Il suo contenuto è derivazione dallo sviluppo della piattaforma sottostante. Non è un pitch scritto da ChatGPT, Claude o Gemini. È la formalizzazione di decisioni, procedure, record, receipt e falsificazioni emerse costruendo Foundation, Brain, Assistant, CLI e i test di repeatability.
+
+Una delle cose più sorprendenti è stato proprio utilizzo e finalità dell'intelligenza artificiale nel progetto:
+
+```text
+mentre tutto gira attorno all'output di ChatGPT, Claude, Gemini
+noi usiamo un modello relativamente economico
+```
+
+Il Brain non è usato per generare risposte brillanti. È usato per:
+
+```text
+produzione di ipotesi
+→ osservazioni
+→ inferenze
+→ gap e conflitti
+→ candidate claims con provenance
+```
+
+L'AI interpreta, il sistema conserva fonti, il gate verifica contratti, la persona decide. L'utilizzo massivo del modello è ridotto a semplice ratifica di poche decisioni da parte dell'owner.
+
+In una eventuale proiezione di mercato, se la piattaforma avrà bisogno di utilizzo massivo di elaborazione di documenti in PDF o MD, questi costi saranno a carico del cliente finale — come costo di acquisizione e storage, non come costo nascosto di inferenza.
+
+```text
+costo modello economico → nostro
+costo elaborazione massiva PDF/MD → cliente finale (acquisizione, SHA-256, RawEvidenceBlob, storage)
+valore → non output generativo, ma dossier verificabile con receipt
+```
+
+Questo distingue il modello da "wrapper di ChatGPT".
+
+---
+
 ## 3. Il problema
 
 Molte attività professionali dipendono da documenti, procedure, evidenze e decisioni. Le informazioni esistono, ma sono frammentate, difficili da attraversare e ancora più difficili da ricostruire quando qualcuno deve spiegare chi ha deciso cosa, sulla base di quali fonti e secondo quale versione.
