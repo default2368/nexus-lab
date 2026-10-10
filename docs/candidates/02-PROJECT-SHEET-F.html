@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Scheda di progetto 2 pagine</title>
+<style>
+@page { size: A4; margin: 2.5cm; }
+body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 800px; margin: 0 auto; padding: 20px; background: white; }
+h1 { font-size: 20pt; color: #0f2a4a; border-bottom: 2px solid #1e3a5f; padding-bottom: 8px; margin-top: 0; }
+h2 { font-size: 14pt; color: #1e3a5f; margin-top: 32px; }
+h3 { font-size: 11pt; color: #333; margin-top: 20px; }
+pre { background: #f5f5f0; padding: 14px; border-radius: 8px; font-size: 9.5pt; line-height: 1.5; white-space: pre-wrap; border: 1px solid #e0ddd8; font-family: 'JetBrains Mono', monospace; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 9pt; }
+table { border-collapse: collapse; width: 100%; margin: 18px 0; font-size: 10pt; }
+th, td { border: 1px solid #d0d0d0; padding: 10px 12px; text-align: left; }
+th { background: #f0f4f8; color: #1e3a5f; font-weight: 600; }
+blockquote { border-left: 3px solid #1e3a5f; margin: 20px 0; padding: 10px 18px; background: #f9fafb; font-style: italic; color: #333; }
+img { max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #e0ddd8; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+@media print { body { padding: 0; } .no-print { display: none; } }
+.print-btn { position: fixed; top: 20px; right: 20px; background: #1e3a5f; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 10pt; z-index: 100; }
+</style>
+</head><body>
+<button class="print-btn no-print" onclick="window.print()">Stampa PDF</button>
+<h1>Scheda di progetto — Open Nexus / Nexus Lab</h1>
+<p><strong>Denominazioni provvisorie — Bozza riservata · ottobre 2026 — 2 pagine</strong></p>
+<hr />
+<h2>Obiettivo</h2>
+<p>Costruire infrastruttura e strumenti per trasformare conoscenza documentata in dossier e applicazioni navigabili, verificabili e governabili, mantenendo esplicite fonti, versioni, verifiche e decisioni.</p>
+<h2>Beneficiari candidati</h2>
+<ul>
+<li>Professionisti che devono ricostruire attività e decisioni (audit, controllo, qualifica)</li>
+<li>Team che gestiscono procedure con evidenze e approvazioni</li>
+<li>Organizzazioni che devono rendere conto di decisioni con fonti</li>
+</ul>
+<p>Non: prospect da qualificare, investitore per pitch, contatto da attivare. Prima di tutto confronto progettuale.</p>
+<h2>Output</h2>
+<ul>
+<li>Piattaforma stabile con contratti e artefatti distribuibili verificabili</li>
+<li>Dossier sintetico con claim, evidenze, fonte, gap, azione, approvazione, receipt</li>
+<li>Interfaccia per navigare dossier e ispezionare evidenze</li>
+<li>Pilot G. corretto da professionista di dominio</li>
+<li>Secondo caso applicativo per testare riusabilità infrastruttura</li>
+</ul>
+<h2>Work package</h2>
+<pre><code class="language-text">WP1  consolidare piattaforma e contratti
+  obiettivo: chiudere base tecnica stabile e verificabile
+  output: piattaforma stabile, artefatti distribuibili, provenienza e controlli
+  stato: in corso
+  dipendenza: PR #14 debug gate
+  gate: piattaforma stabile
+
+WP2  acquisire e strutturare le fonti
+  obiettivo: trasformare documenti in record con fonte e versione
+  output: acquisizione documenti, record e relazioni
+  stato: in sviluppo
+  dipendenza: WP1
+  gate: documento → record con fonte
+
+WP3  costruire dossier ed esperienza utente
+  obiettivo: rendere dossier navigabile e verificabile
+  output: interfaccia per ispezionare risultati, evidenze, gap
+  stato: in sviluppo
+  dipendenza: WP2
+  gate: dossier sintetico ENG-001
+
+WP4  eseguire e correggere il pilot G.
+  obiettivo: verificare modello con professionista di dominio
+  output: dossier corretto, feedback strutturato
+  stato: North Star
+  dipendenza: WP2+WP3
+  gate: G. riconosce o corregge il processo
+
+WP5  verificare secondo dominio e sostenibilità
+  obiettivo: testare se infrastruttura resta comune cambiando dominio
+  output: secondo caso (A. operation/evidence reconstruction), analisi sostenibilità
+  stato: da avviare dopo M4
+  dipendenza: WP4
+  gate: ripetibilità con secondo operatore + decisione sviluppo/pilot/finanziamento
+</code></pre>
+<h2>Milestone</h2>
+<pre><code class="language-text">M1  piattaforma stabile
+M2  documento → record
+M3  dossier sintetico
+M4  review G.
+M5  ripetibilità con secondo operatore
+M6  secondo dominio
+M7  decisione di sviluppo / pilot / finanziamento
+</code></pre>
+<h2>Dipendenze e rischi</h2>
+<ul>
+<li>complessità e dipendenza dal promotore</li>
+<li>dati e controllo degli accessi</li>
+<li>assenza utenti e mercato non validato</li>
+<li>eccesso di governance</li>
+<li>denominazione e naming</li>
+</ul>
+<h2>Criteri di successo</h2>
+<ul>
+<li>G. riconosce o corregge il processo (non dice che UI è bella)</li>
+<li>Dossier sintetico con fonte, versione, gap, approvazione</li>
+<li>Ripetibilità: secondo operatore che non ha visto originale riproduce dossier</li>
+<li>Infrastruttura resta comune mentre dominio cambia (Infrastructure reusable, Domain replaceable)</li>
+</ul>
+<h2>Ipotesi da falsificare</h2>
+<pre><code class="language-text">H1 buyer values traceability over generic generation
+H2 governance supports higher price tier
+H3 same infrastructure supports second domain
+H4 dossier reduces reconstruction/review time
+H5 non-technical expert can correct model
+
+F1 G. does not recognize workflow
+F2 source/claim links not useful during review
+F3 dossier production costs more than manual reconstruction
+F4 second domain requires kernel changes
+F5 buyer will not allocate budget for governance
+F6 another operator cannot reproduce dossier
+</code></pre>
+<hr />
+<p><em>Bozza riservata · denominazioni provvisorie · nessun impegno richiesto</em></p>
+<div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0ddd8; font-size: 8pt; color: #888; text-align: center;">
+Bozza riservata · Open Nexus / Nexus Lab — denominazioni provvisorie · ottobre 2026 · Nessun impegno richiesto
+</div>
+</body></html>
