@@ -319,6 +319,13 @@ function parseOptions(args) {
     const arg = args[index];
     if (!arg.startsWith('--')) fail(`Opzione sconosciuta: ${arg}`);
     const key = arg.slice(2);
+    
+    // Handle boolean flags (like --force) without values
+    if (key === 'force') {
+      options[key] = 'true';
+      continue;
+    }
+    
     const value = args[index + 1];
     if (!value || value.startsWith('--')) fail(`Valore mancante per --${key}`);
     options[key] = value;
@@ -469,22 +476,199 @@ function commandClean(options) {
   console.log(`cleaned run=${options['run-id']}`);
 }
 
+function commandInit(options) {
+  const force = options.force === 'true' || options.force === '1';
+  const nexusDir = path.join(CONTROL_PLANE_ROOT, '.nexus');
+  const workspacesDir = RUN_ROOT;
+  
+  console.log('🔄 Inizializzazione ambiente Nexus Lab');
+  console.log('');
+  
+  // 1. Check if .nexus directory exists
+  let nexusExists = false;
+  try {
+    fs.accessSync(nexusDir);
+    nexusExists = true;
+    console.log(`✓ Directory .nexus trovata: ${nexusDir}`);
+  } catch (error) {
+    console.log(`- Directory .nexus non trovata, sarà creata`);
+  }
+  
+  // 2. Create .nexus directory if it doesn't exist
+  if (!nexusExists) {
+    try {
+      fs.mkdirSync(nexusDir, { recursive: true, mode: 0o700 });
+      console.log(`✓ Directory .nexus creata: ${nexusDir}`);
+    } catch (error) {
+      fail(`Impossibile creare directory .nexus: ${error.message}`);
+    }
+  }
+  
+  // 3. Check existing files in .nexus
+  const localFile = path.join(nexusDir, 'workspace.local.json');
+  const lockFile = path.join(nexusDir, 'workspace.lock.json');
+  const receiptsDir = path.join(nexusDir, 'receipts');
+  
+  console.log('');
+  console.log('📁 File di configurazione:');
+  
+  if (fs.existsSync(localFile)) {
+    console.log(`  ✓ workspace.local.json esiste (non sovrascritto)`);
+  } else {
+    console.log(`  - workspace.local.json non trovato`);
+  }
+  
+  if (fs.existsSync(lockFile)) {
+    console.log(`  ✓ workspace.lock.json esiste (non sovrascritto)`);
+  } else {
+    console.log(`  - workspace.lock.json non trovato`);
+  }
+  
+  // 4. Create receipts directory if it doesn't exist
+  try {
+    fs.accessSync(receiptsDir);
+    console.log(`  ✓ Directory receipts esiste`);
+  } catch (error) {
+    try {
+      fs.mkdirSync(receiptsDir, { recursive: true, mode: 0o700 });
+      console.log(`  ✓ Directory receipts creata`);
+    } catch (mkdirError) {
+      console.log(`  ✗ Impossibile creare directory receipts: ${mkdirError.message}`);
+    }
+  }
+  
+  // 5. Clean old run workspaces
+  console.log('');
+  console.log('🧹 Pulizia sessioni precedenti:');
+  
+  let cleanedCount = 0;
+  let skippedCount = 0;
+  
+  try {
+    if (fs.existsSync(workspacesDir)) {
+      const items = fs.readdirSync(workspacesDir, { withFileTypes: true });
+      
+      for (const item of items) {
+        if (!item.isDirectory()) continue;
+        
+        const runDir = path.join(workspacesDir, item.name);
+        const markerFile = path.join(runDir, '.nexus-run.json');
+        
+        // Skip if it's not a run directory (no marker file)
+        if (!fs.existsSync(markerFile)) {
+          console.log(`  - Skipped ${item.name}: non è una run workspace`);
+          skippedCount++;
+          continue;
+        }
+        
+        try {
+          const marker = JSON.parse(fs.readFileSync(markerFile, 'utf8'));
+          
+          // Check if it's a finalized run
+          if (marker.status === 'FINALIZED') {
+            // Clean finalized runs
+            fs.rmSync(runDir, { recursive: true, force: false });
+            console.log(`  ✓ Cleaned ${item.name}: run finalizzata`);
+            cleanedCount++;
+          } else {
+            console.log(`  - Kept ${item.name}: status=${marker.status}`);
+            skippedCount++;
+          }
+        } catch (error) {
+          console.log(`  ✗ Error processing ${item.name}: ${error.message}`);
+        }
+      }
+      
+      if (items.length === 0) {
+        console.log(`  - Nessuna directory run trovata in ${workspacesDir}`);
+      }
+    } else {
+      console.log(`  - Directory workspaces non trovata: ${workspacesDir}`);
+      console.log(`    (sarà creata automaticamente quando necessario)`);
+    }
+  } catch (error) {
+    console.log(`  ⚠️  Errore durante la pulizia: ${error.message}`);
+  }
+  
+  // 6. Optional: force clean of old directories without markers
+  if (force) {
+    console.log('');
+    console.log('⚡ Pulizia forzata (--force):');
+    
+    try {
+      if (fs.existsSync(workspacesDir)) {
+        const items = fs.readdirSync(workspacesDir, { withFileTypes: true });
+        let forceCleaned = 0;
+        
+        for (const item of items) {
+          if (!item.isDirectory()) continue;
+          
+          const runDir = path.join(workspacesDir, item.name);
+          const markerFile = path.join(runDir, '.nexus-run.json');
+          
+          // Clean directories without marker files (old/incomplete runs)
+          if (!fs.existsSync(markerFile)) {
+            try {
+              fs.rmSync(runDir, { recursive: true, force: true });
+              console.log(`  ✓ Forced clean ${item.name}: directory senza marker`);
+              forceCleaned++;
+            } catch (error) {
+              console.log(`  ✗ Error forcing clean ${item.name}: ${error.message}`);
+            }
+          }
+        }
+        
+        if (forceCleaned > 0) {
+          console.log(`  Totale directory pulite forzatamente: ${forceCleaned}`);
+        } else {
+          console.log(`  - Nessuna directory da pulire forzatamente`);
+        }
+      }
+    } catch (error) {
+      console.log(`  ⚠️  Errore durante pulizia forzata: ${error.message}`);
+    }
+  }
+  
+  // 7. Summary
+  console.log('');
+  console.log('📊 Riepilogo inizializzazione:');
+  console.log(`  • Directory .nexus: ${nexusExists ? 'esiste' : 'creata'}`);
+  console.log(`  • Run workspace pulite: ${cleanedCount}`);
+  console.log(`  • Run workspace mantenute: ${skippedCount}`);
+  console.log(`  • Modalità force: ${force ? 'SI' : 'NO'}`);
+  console.log('');
+  console.log('🎉 Inizializzazione completata!');
+  console.log('');
+  console.log('Prossimi passi:');
+  console.log('  1. Verifica che nexus.spec.json esista nella root');
+  console.log('  2. Esegui ./run-project.sh resolve per creare il lock');
+  console.log('  3. Usa ./run-project.sh show per visualizzare lo stato');
+  console.log('');
+  console.log('Per informazioni: ./run-project.sh help');
+}
+
 function help() {
   console.log(`Nexus Lab control-plane workspace manager\n\n` +
 `Usage\n` +
+`  ./run-project.sh init [--force]\n` +
 `  ./run-project.sh resolve [--spec FILE] [--local FILE] [--lock FILE]\n` +
 `  ./run-project.sh validate [--spec FILE] [--local FILE] [--lock FILE]\n` +
 `  ./run-project.sh show [--lock FILE]\n` +
 `  ./run-project.sh run allocate --plan PLAN_ID [--spec FILE] [--local FILE] [--lock FILE]\n` +
 `  ./run-project.sh run status --run-id RUN_ID\n` +
 `  ./run-project.sh run finalize --run-id RUN_ID --receipt FILE\n` +
-`  ./run-project.sh run clean --run-id RUN_ID\n`);
+`  ./run-project.sh run clean --run-id RUN_ID\n` +
+`\n` +
+`Description\n` +
+`  init      Inizializza l'ambiente, crea directory .nexus e pulisce sessioni precedenti\n` +
+`            --force    Pulisce anche directory senza marker (run vecchie/incomplete)\n`);
 }
 
 function main() {
   const args = process.argv.slice(2);
   const command = args.shift() || 'help';
   if (command === 'help' || command === '--help' || command === '-h') return help();
+  if (command === 'init') return commandInit(parseOptions(args));
   if (command === 'resolve') return commandResolve(parseOptions(args));
   if (command === 'validate') return commandValidate(parseOptions(args));
   if (command === 'show') return commandShow(parseOptions(args));
