@@ -26,6 +26,27 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # ============================================================
+# SESSION CONTEXT — sourced da session-env.sh, se presente
+# ============================================================
+SESSION_ENV="$SCRIPT_DIR/session-env.sh"
+if [[ -f "$SESSION_ENV" ]]; then
+  # salva args correnti, svuota, source, ripristina
+  _pss_prev_args=("$@")
+  set --
+  # shellcheck disable=SC1090
+  source "$SESSION_ENV" >/dev/null 2>&1 || true
+  set -- ${_pss_prev_args[@]+"${_pss_prev_args[@]}"}
+  unset _pss_prev_args
+fi
+
+# Fallback: se session-env non ha prodotto variabili utili,
+# deriva comunque dal branch corrente.
+SESSION_BRANCH="${ARENA_SESSION_BRANCH:-}"
+SESSION_ID="${ARENA_SESSION_ID:-}"
+SESSION_PROJECT="${ARENA_SESSION_PROJECT:-}"
+SESSION_KIND="${ARENA_SESSION_KIND:-unknown}"
+
+# ============================================================
 # CONFIG
 # ============================================================
 REMOTE="origin"
@@ -82,7 +103,8 @@ preflight() {
 # RACCOLTA STATO
 # ============================================================
 collect_state() {
-  BRANCH="$(git branch --show-current)"
+  # Preferisci la sessione se disponibile, altrimenti git diretto
+  BRANCH="${SESSION_BRANCH:-$(git branch --show-current)}"
   HEAD="$(git rev-parse HEAD)"
   REMOTE_URL="$(git remote get-url "$REMOTE")"
 
@@ -107,6 +129,9 @@ collect_state() {
 show_state() {
   title "Stato locale"
   say "  root:    $WORKSPACE_ROOT"
+  if [[ -n "$SESSION_ID" && "$SESSION_KIND" == "arena" ]]; then
+    say "  session: $SESSION_ID  ($SESSION_PROJECT)"
+  fi
   say "  remote:  $REMOTE  ($REMOTE_URL)"
   say "  branch:  $BRANCH"
   say "  HEAD:    $HEAD"
