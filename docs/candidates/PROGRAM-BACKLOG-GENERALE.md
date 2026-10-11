@@ -48,33 +48,89 @@ Questo prova il meccanismo senza trasformare Open Nexus in un prodotto esclusiva
 
 ---
 
-## 1. Foundation 0.8.2 — P0 critical path
+## 1. Foundation 0.8.2 — P0 critical path — UPDATED 2026-10-11 per owner decisions context 3-8
 
-**Classificazione:** `foundation/backlog/` — EPIC-0.8.2, PR #14, SURF-082
+**Classificazione:** `foundation/backlog/` — EPIC-0.8.2, PR #14, SURF-082 — AMENDED by NX-D-045-D1 APPROVED
 
-Resta la sola release critical path.
+Resta la sola release critical path ma con scope ridotto onesto.
 
+**OWNER DECIDED:**
 ```text
-PR #14 debug gate
-→ merge e verifica
-poi
-→ /api/v1/debug/redis read-only security review
-→ SURF-082-004/006/007
-→ final compatibility closure
-→ v0.8.2
+release target → simple (APPROVED)
+Core Admin package → CORE_ADMIN_PACKAGE_OUT_OF_0_8_2_RELEASE_SCOPE (APPROVED)
+rendering.kind → DEFERRED_WITH_OWNER_DECISION (PENDING, A raccomandato)
+Operations V1 / Core Admin profile / System→Operations → POST_0_8_2
 ```
 
-Non riceve:
+**Must NOT in 0.8.2:**
+```text
+Distribution Profile framework
+manifest profile fields
+producer filtering
+validator profile rules
+Core Admin fixtures
+Core Admin materialization/clean-room (8-page diagnostic remains PROFILE_UNAPPROVED NOT RELEASE EVIDENCE)
+package version transition Core Admin
+rendering.kind
+new public contract
+delete core-admin ApplicationBundle/source application
+```
 
+**Must close prima release:**
+```text
+diagnostic API policy closure — classification:
+  /api/v1/redis/test → PRODUCTION_DENY
+  /api/redis /api/redis/test → DEVELOPMENT_ONLY / PRODUCTION_DENY
+  /api/v1/redis/pages → AUTH_REQUIRED o production deny
+  /api/v2/discovery default/list_smart → candidate intentionally public
+  debug/refresh/mutating → AUTH_REQUIRED
+  sys/system-control → production owner/policy review
+  Non blanket gate: INTENTIONALLY_PUBLIC / AUTH_REQUIRED / PRODUCTION_DENY / DEVELOPMENT_ONLY / UNKNOWN
+backup/snapshot inventory disposition
+simple package full pipeline
+0.8.1 → 0.8.2 compatibility matrix
+full-suite current rerun
+build/typecheck/security guard
+release notes/version/tag
+branch/stash hygiene
+```
+
+**Next checkpoint — F08-020 Simple Distribution Release Proof (CANDIDATE):**
+```text
+current committed Foundation
+→ simple producer (5 pages, 4 template, 5 asset)
+→ manifest validation
+→ materialization
+→ external destination atomically
+→ clean-room (repositoryObservations 0)
+→ compatibility matrix v0.8.1→0.8.2
+→ receipt YAML (foundationRelease, sourceCommit GIT_VERIFIED, worktree CLEAN, applicationId simple, manifestSha256, packageDigest, cleanRoom PASS, releaseEligible true)
+```
+DoD 12 items — vedi docs/candidates/DECISION-0.8.2-SIMPLE-DISTRIBUTION-PROOF-F08-020.md
+
+**Release statement candidate:**
+> Foundation 0.8.2 consolida la convergenza di authority e sicurezza necessaria a produrre un package Simple bounded, riproducibile e verificato in clean-room, mantenendo espliciti e non distribuiti i residual source non ancora migrati.
+
+**Non riceve:**
 - upload
 - Brain contracts
 - Magnifier
-- CLI workspace
-- Semantic 0.9
+- CLI workspace implementation (ma CLI design per workspace create è P2)
+- Semantic 0.9 (ma 0.9 è next dopo 0.8.2 proof)
 
 **WIP:** mutazione attiva — 1 repository, 1 mutazione
 
-**DECIDED:** proceeds, non interrotta
+**DECIDED:** proceeds con scope ridotto, non interrotta — repo può essere complesso, prodotto pulito — Repository-Centric → Artifact-Centric
+
+**Link:**
+- DECISION-0.8.2-CLOSURE-STRATEGY.md (PARTIALLY APPROVED)
+- DECISION-0.8.2-RELEASE-TARGET-OWNER-APPROVED.md
+- DIRECTIVE-ARENA-0.8.2-OWNER-DECISIONS-RECORDED.md
+- EXPLANATION-0.8.2-CORE-ADMIN-PACKAGE-DISTRIBUTION.md
+- DECISION-0.8.2-D2-RENDERING-KIND.md
+- DECISION-0.8.2-SIMPLE-DISTRIBUTION-PROOF-F08-020.md
+- IMPLICATIONS-0.8.2-SIMPLE-DISTRIBUTION-FACTORY.md
+- STRATEGY-FOUNDATION-BOOTSTRAP-SELF-HOSTING.md
 
 ---
 
@@ -216,9 +272,9 @@ Non:
 
 ---
 
-## 5. CLI — P2 contract/design lane
+## 5. CLI — P2 contract/design lane — UPDATED 2026-10-11 con Foundation Bootstrap
 
-**Classificazione:** `cli/backlog/BACKLOG.md` — CLI-008 audit, CLI-009 authoring, CLI-010 PlaceholderContentProvider, CLI-012 Materializer, CLI-015 legacy, CLI-018 orchestrator, CLI-019 ProjectContext + nuovo ECOSYSTEM-GOVERNANCE-PROPOSAL
+**Classificazione:** `cli/backlog/BACKLOG.md` — CLI-008 audit, CLI-009 authoring, CLI-010 PlaceholderContentProvider, CLI-012 Materializer, CLI-015 legacy, CLI-018 orchestrator, CLI-019 ProjectContext + nuovo ECOSYSTEM-GOVERNANCE-PROPOSAL + STRATEGY-FOUNDATION-BOOTSTRAP-SELF-HOSTING
 
 Per ora può avanzare come contratto/documentazione:
 
@@ -229,6 +285,11 @@ WorkspaceLock
 GitSnapshot
 VerificationReceipt
 HandoffReceipt
+Foundation Release
+ApplicationSpec
+DomainPackSpec
+WorkspaceProfile
+Authoring Core
 ```
 
 Implementation soltanto se non sottrae owner bandwidth alle prime tre corsie.
@@ -241,9 +302,49 @@ opnx ingest procedure.md
 
 Ma inizialmente Assistant può chiamare direttamente l'Acquisition API. Non aspettiamo la CLI per provare il vertical slice.
 
+**Seconda responsabilità inevitabile emersa context 8 — workspace factory:**
+
+```bash
+opnx workspace create \
+  --foundation v0.9.x \
+  --profile governed-dossier \
+  --domain g-audit
+
+opnx plan
+opnx apply
+opnx verify
+```
+
+Receipt:
+
+```yaml
+foundationRelease:
+contractBundle:
+workspaceProfile:
+domainPack:
+sourceCommit:
+generatedFiles:
+packageDigest:
+compatibilityFindings:
+verification:
+```
+
+La CLI non duplica Foundation. La orchestra. È il meccanismo che rende concreta la frase "stessa macchina, output differenti" per N settori.
+
+Foundation Bootstrap sequence:
+```text
+1. 0.8.2 Simple Proof
+2. 0.9 Semantic Entity
+3. second app Domain Pack N-sectors proof
+4. Workspace/ApplicationSpec machine-readable
+5. CLI workspace create → fresh consumer repo
+6. Foundation Bootstrap experiment F0→F1
+7. equivalence/fixed-point gate → decisione Foundation Next
+```
+
 **WIP:** design/docs soltanto — 0 mutazioni attive
 
-**DECIDED:** contract/design lane, implementation conditional
+**DECIDED:** contract/design lane, implementation conditional — APPROVED ARCHITECTURAL DIRECTION IMPLEMENTATION DEFERRED per bootstrap
 
 ---
 

@@ -1,17 +1,69 @@
 # DECISION — 0.8.2 Closure Strategy — Patch release, non framework
 
-**Status:** OWNER_DECISION_PENDING
+**Status:** PARTIALLY APPROVED — D1 APPROVED, D2 PENDING, D3-D6 CONDITIONAL — superseded in part by context 3-8 docs
 **DecisionId:** NX-D-045
 **HandoffId:** 0.8.2-closure-strategy
-**Source:** Context 1 report + Main Agent recommendation
+**Source:** Context 1 report + Main Agent recommendation + Context 2-8 owner approvals
 **ConversationRef:**
   conversationId: arena/86a8bf50-nexus-lab
-  turnRange: 2026-10-09T20:30-20:45
-  date: 2026-10-09
-  sourceHash: 9e06f47 + 6c7d303
+  turnRange: 2026-10-09T20:30-21:30 + 2026-10-11 context 3-8
+  date: 2026-10-09 / 2026-10-11
+  sourceHash: 9e06f47 + 6c7d303 + 58caf95
   extractor: documentation-agent v0.1.0
   targetDocument: docs/candidates/DECISION-0.8.2-CLOSURE-STRATEGY.md
-  approvalStatus: CANDIDATE
+  approvalStatus: PARTIALLY APPROVED — see amendment 2026-10-11
+**SupersededBy:**
+  - docs/candidates/DECISION-0.8.2-RELEASE-TARGET-OWNER-APPROVED.md (D1 APPROVED)
+  - docs/candidates/DIRECTIVE-ARENA-0.8.2-OWNER-DECISIONS-RECORDED.md (directive)
+  - docs/candidates/EXPLANATION-0.8.2-CORE-ADMIN-PACKAGE-DISTRIBUTION.md (7 points)
+  - docs/candidates/DECISION-0.8.2-D2-RENDERING-KIND.md (D2 PENDING, A recommended)
+  - docs/candidates/DECISION-0.8.2-SIMPLE-DISTRIBUTION-PROOF-F08-020.md (F08-020 CANDIDATE)
+  - docs/candidates/IMPLICATIONS-0.8.2-SIMPLE-DISTRIBUTION-FACTORY.md
+  - docs/candidates/STRATEGY-FOUNDATION-BOOTSTRAP-SELF-HOSTING.md
+  - docs/candidates/DECISION-0.8.2-RELEASE-STATEMENT-CANDIDATE.md
+
+## AMENDMENT 2026-10-11 — Owner decisions recorded context 3-8
+
+### D1 — APPROVED
+```text
+release target → simple
+Core Admin package → CORE_ADMIN_PACKAGE_OUT_OF_0_8_2_RELEASE_SCOPE
+```
+- Non implementiamo in 0.8.2: Distribution Profile framework, manifest profile fields, producer filtering, validator profile rules, Core Admin fixtures, Core Admin materialization/clean-room, version transition
+- Package vs applicazione: Core Admin continua a esistere e funzionare nel repo ≠ viene distribuito come package 0.8.2
+- Future: rebuild Operations su host approvato, riuso primitive, migrazione behavior utile, retirement solo dopo parity gates (8 checklist)
+
+### D2 — PENDING — A raccomandato
+```text
+rendering.kind → DEFERRED_WITH_OWNER_DECISION
+current contract invariato: templateRef/policy/ownerBundle/route
+PHYSICAL finding post-0.8.2
+```
+
+### D3-D4 — APPROVED as hygiene
+- Fallback IDs → HISTORICAL_DERIVED_DIAGNOSTIC_IDS NOT RUNTIME_CANONICAL NOT SUPPORTED
+- Operations V1 / Core Admin profile / System→Operations migration → POST_0_8_2
+
+### D5 — Aggiornato
+Must close: diagnostic API policy (/api/v1/redis/test→PRODUCTION_DENY, /api/redis→DEVELOPMENT_ONLY, /api/v1/redis/pages→AUTH_REQUIRED, /api/v2/discovery→intentionally public), backup/snapshot disposition, simple full pipeline, 0.8.1→0.8.2 matrix, full-suite rerun, build/typecheck/security guard, release notes/version/tag, branch hygiene
+Can defer: indexV1 unique, /debug migration, Hello API/Redis Console retirement, Hub, about-legacy, Template Lab ownership, System/API Control migration, WowPageTemplate uncertainty, package-wide catalog — condition not in simple package or production-gated or explicit disposition
+
+### Nuova definizione 0.8.2
+> Foundation 0.8.2 consolida la convergenza di authority e sicurezza necessaria a produrre un package Simple bounded, riproducibile e verificato in clean-room, mantenendo espliciti e non distribuiti i residual source non ancora migrati.
+
+Simple = fabbrica: repository → authoring/compiler/governance, package → prodotto distribuibile, Execution → runtime sottile, Domain Pack → differenzia verticali. Repo può essere complesso, prodotto pulito. Repository-Centric → Artifact-Centric.
+
+### F08-020 Simple Distribution Release Proof — CANDIDATE next
+- current Foundation → Simple package → external destination → clean-room → compatibility matrix → receipt
+- DoD 12 items: clean tree, producer PASS, validator PASS, 5 page IDs, 4 template, 5 asset, no leakage, materialization PASS, external dest atomic, clean-room PASS, repoObservations 0, v0.8.1 compatibility, protected kernel diff 0, receipt generated
+
+### Bootstrap / Self-Hosting — APPROVED ARCHITECTURAL DIRECTION IMPLEMENTATION DEFERRED
+- Factory può usare proprio processo per rifondare sé stessa — intuizione owner 10/10
+- Due strade: 1) nuova app pulita che consuma Foundation (consumer pulito) 2) nuova Foundation bootstrap F0→F1→F2 self-hosting, fixed-point test semantic inventory A = B
+- Moat: codebase pulita→output copiabile, meccanismo che la rigenera→capability, meccanismo che rigenera sé stesso→candidate moat
+- Sequence: 0.8.2 Simple Proof → 0.9 Semantic Entity → second app Domain Pack N-sectors → Workspace/ApplicationSpec → CLI workspace create → Foundation Bootstrap experiment → equivalence gate
+
+--- Original decision below — preserved for provenance ---
 
 ---
 

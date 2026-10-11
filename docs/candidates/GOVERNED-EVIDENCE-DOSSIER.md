@@ -207,6 +207,130 @@ Formula onesta:
 
 ---
 
+## ADDENDUM 2026-10-11 — Simple come fabbrica + Foundation Bootstrap — context 5-8
+
+**Status addendum:** CANDIDATE ANALYSIS — link a decisioni 0.8.2
+
+### Simple factory — implicazione per dossier
+
+Se catena funziona:
+
+```text
+ApplicationBundle Simple
+→ Foundation
+→ manifest
+→ package autonomo
+→ clean-room
+→ Execution
+```
+
+allora Open Nexus è già fabbrica di applicazioni distribuibili, non solo framework.
+
+Per Governed Evidence Dossier significa:
+
+```text
+repository → authoring/compiler/governance
+package → prodotto distribuibile (dossier app)
+Execution → runtime sottile
+Domain Pack → differenzia verticali (G audit, A operation reconstruction, F project evidence)
+```
+
+Repo può essere complesso, prodotto pulito:
+
+```text
+current source residuals → governati e non distribuiti
+consumer artifact → pulito, bounded, verificato
+```
+
+Repository-Centric → Artifact-Centric — già dimostrato in 0.8.1 con simple 5 pagine 4 template 5 asset producer ACCEPT GIT_VERIFIED CLEAN releaseEligible true validator ACCEPT materialization 0 clean-room ok repositoryObservations 0.
+
+### Moat — Foundation compiler/control plane
+
+Execution Shell riproducibile 80%. Moat meno copiabile:
+
+```text
+contratti
+authority
+BundleCollector
+profile resolution
+validation
+compatibility
+materialization
+provenance
+release receipts
+migration findings
+```
+
+Ovvero Foundation compiler/control plane. Modello:
+
+```text
+Execution → sottile distribuibile
+Foundation release/producer → governato
+CLI → orchestratore (opnx workspace create --foundation v0.9.x --profile governed-dossier --domain g-audit)
+Brain → propone Domain Pack/record candidati
+umano → approva
+Foundation → compila
+```
+
+Risponde a osservazione owner 80% riproducibile — Foundation messa in mezzo spiega stranezze codificate.
+
+### Brain come authoring assistant
+
+```text
+documenti/procedure → Brain interpreta → Candidate Domain Definition → umano corregge → Domain Pack approvato → Foundation produce package → Execution esegue
+```
+
+AI entra una volta interpretazione. Resto deterministico: schema, identity, package, hash, compatibility, deployment receipt.
+
+Non vendiamo risposta AI. Vendiamo applicazione prodotta da conoscenza governata.
+
+### Bootstrap — moat candidato forte
+
+Intuizione owner 10/10: fabbrica può usare proprio processo per rifondare sé stessa.
+
+Due strade:
+
+1. **Nuova app pulita che consuma Foundation** — `new-knowledge-app/.nexus/applications/domain-packs/presentation/fixtures/tests/package.json` — non copia kernel, lo consuma come release — consumer pulito — strada semplice migliore
+
+2. **Nuova Foundation bootstrap** — F0 produce F1, F1 produce stessi artifact approvati, F1 può produrre F2 equivalente — self-hosting compiler pattern — fixed-point test semantic inventory A = B (page IDs, order, templates, assets, routes, capabilities, contracts, clean-room behavior)
+
+Moat:
+
+```text
+codebase pulita → output (copiabile)
+meccanismo che la rigenera → capability (più difficile)
+pipeline governata che produce N domini → forte
+Foundation che può riprodurre semanticamente sé stessa → molto forte
+```
+
+Quando rumore storico supera valore operativo, non pulisci infinito — materializzi nuova baseline da conoscenza e contratti approvati.
+
+Sequence realistica:
+
+```text
+1. chiudere 0.8.2 → Simple Distribution Proof F08-020
+2. integrare Semantic Entity 0.9 → core invariato
+3. produrre seconda app da Domain Pack → prova N-settori
+4. definire Workspace/ApplicationSpec → input machine-readable
+5. CLI workspace create → fresh consumer repo
+6. Foundation Bootstrap experiment → F0 produce F1
+7. equivalence/fixed-point gate → decisione Foundation Next
+```
+
+Status bootstrap: APPROVED ARCHITECTURAL DIRECTION IMPLEMENTATION DEFERRED
+
+### Link
+
+- DECISION-0.8.2-RELEASE-TARGET-OWNER-APPROVED.md
+- DIRECTIVE-ARENA-0.8.2-OWNER-DECISIONS-RECORDED.md
+- EXPLANATION-0.8.2-CORE-ADMIN-PACKAGE-DISTRIBUTION.md
+- IMPLICATIONS-0.8.2-SIMPLE-DISTRIBUTION-FACTORY.md
+- STRATEGY-FOUNDATION-BOOTSTRAP-SELF-HOSTING.md
+- DECISION-0.8.2-SIMPLE-DISTRIBUTION-PROOF-F08-020.md
+- DECISION-0.8.2-RELEASE-STATEMENT-CANDIDATE.md
+
+---
+
 ## Provenance finale
 
 ```
@@ -215,8 +339,9 @@ Tool version: 0.1.0
 Model_id: none (Classe 0)
 Collected_at: 2026-10-09T19:35:00Z derivato
 Source: 24-SCANSIONE-PER-CAPACITA.md SHA 582d4373807d + 37-LETTURA-OWNER-CORRETTA + 38-REGOLA + 39-WORKFLOW
-Status: CANDIDATE → richiede owner approval → APPROVED → VERSIONED
+Addendum 2026-10-11: context 5-8 Simple factory + bootstrap + moat + CLI workspace create + N-sectors + release statement candidate Foundation 0.8.2 consolida convergenza authority e sicurezza necessaria a produrre package Simple bounded riproducibile verificato in clean-room mantenendo espliciti e non distribuiti residual source non ancora migrati
+Status: CANDIDATE → richiede owner approval → APPROVED → VERSIONED + addendum CANDIDATE
 Promotion: explicit human approval required, no auto-canonical (PROHIBITED)
 ```
 
-*Prodotto, non performance — da validare con pilot G.*
+*Prodotto, non performance — da validare con pilot G. — con factory e bootstrap come moat candidato*
