@@ -1,0 +1,179 @@
+../
+├── nexus-lab-documentation-old.zip
+├── nexus-startup-documentation
+│   └── Startup -Roadmap.md
+├── nexus-tools
+│   └── report-adr-backlog.sh
+├── open-nexus-insight
+│   ├── AGENTS.md
+│   ├── brain
+│   │   ├── data
+│   │   │   └── records
+│   │   │       └── 2026-09-25-risk-ip-001-open-nexus-naming-collision.yaml
+│   │   └── knowledge
+│   │       ├── 05-EVALUATION.md
+│   │       ├── 06-STORAGE-AND-VALIDATION.md
+│   │       ├── 07-ACQUISITION-AND-MCP.md
+│   │       ├── 08-RULESETS-AND-AGENT-PROFILES.md
+│   │       ├── 09-DOMAIN-ACQUISITION-AND-CANDIDATE-MODELING.md
+│   │       ├── 10-KNOWLEDGE-ACQUISITION-AND-INGESTION-ARCHITECTURE.md
+│   │       └── 11-STRUCTURED-DOCUMENT-MODEL-AND-EVIDENCE-STORAGE-PROFILES.md
+│   ├── cli
+│   │   └── backlog
+│   │       ├── BACKLOG.md
+│   │       └── PROMPT-AUTHORING-AUDIT.md
+│   ├── documentation
+│   │   ├── briefs
+│   │   │   └── STRATEGIC-BRIEF-BRANDING-SECTORS-FUNDING-2026-10-01.md
+│   │   ├── governance
+│   │   │   ├── INTAKE-AND-QUARANTINE.md
+│   │   │   └── MAINTENANCE-WORKFLOW.md
+│   │   ├── guides
+│   │   │   └── GUIDA-DUMMIES-VIS-001-G-AUDIT.md
+│   │   ├── prompts
+│   │   │   ├── PROMPT-BOOTSTRAP-NEXUS-LAB-DOCUMENTATION.md
+│   │   │   ├── PROMPT-DOC-TOOL-002-LOCAL-SPOOL.md
+│   │   │   ├── PROMPT-F08-019A-LIVE-DISTRIBUTION-CLOSURE.md
+│   │   │   ├── PROMPT-FOUNDATION-0.8.2-POST-MERGE-STATUS-RECONCILIATION.md
+│   │   │   ├── PROMPT-FOUNDATION-0.8.2-SURFACE-CONVERGENCE.md
+│   │   │   ├── PROMPT-FOUNDATION-DEFAULTS-LIVENESS-HANDOFF.md
+│   │   │   ├── PROMPT-FOUNDATION-DOCUMENTATION-INDEX-AGENT.md
+│   │   │   ├── PROMPT-GENERIC-MAINTENANCE.md
+│   │   │   ├── PROMPT-PROV-082-001-DIRTY-WORKTREE-PROVENANCE.md
+│   │   │   ├── PROMPT-PROV-082-001A-RELEASE-ELIGIBILITY-COMPLETENESS.md
+│   │   │   ├── PROMPT-SURF-082-002-REGISTRY-SHIM-CONVERGENCE.md
+│   │   │   ├── PROMPT-SURF-082-002A-EMPTY-REGISTRY-SHIMS.md
+│   │   │   ├── PROMPT-SURF-082-003-STALE-REFERENCE-CONVERGENCE.md
+│   │   │   ├── PROMPT-SURF-082-004-LEGACY-REFERENCE-MIGRATION.md
+│   │   │   ├── PROMPT-SURF-082-005-REGISTRY-CONSUMER-REPOINTING.md
+│   │   │   └── PUBLISHER-PROMPT.md
+│   │   ├── publication-packets
+│   │   │   └── PUBLICATION-PACKET-ON-ACQ-2026-1.0.yaml
+│   │   ├── README.md
+│   │   ├── research
+│   │   │   └── benchmarks
+│   │   │       ├── TOOLJET-benchmark.md
+│   │   │       └── TRUSTABLE-vs-OPENNEXUS.md
+│   │   ├── roadmaps
+│   │   │   └── DOCUMENTATION-TOOLING-ROADMAP.md
+│   │   └── stakeholders
+│   │       └── a
+│   │           ├── ALLEGATO-NARRATIVO-PER-A.md
+│   │           ├── FEEDBACK-A-2026-10-01.md
+│   │           └── NOTA-PER-A.md
+│   ├── feedback-a
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.14-ocr.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.14-upright-cw.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.14-upright.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.15-ocr.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.15-upright-cw.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.15-upright.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.16-ocr.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.16-upright-cw.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.16-upright.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.17-ocr.png
+│   │   ├── WhatsApp Image 2026-10-01 at 11.32.17-upright-cw.png
+│   │   └── WhatsApp Image 2026-10-01 at 11.32.17-upright.png
+│   ├── foundation
+│   │   └── backlog
+│   │       ├── ADR-0016-SEMANTIC-ENTITY-PROJECTION-MODEL.md
+│   │       ├── ADR-0017-EPISTEMIC-ANNOTATION-PROFILE.md
+│   │       ├── BACKLOG-0.8-X-FOUNDATION-COMPLETION.md
+│   │       ├── BACKLOG-0.8.2-SURFACE-CONVERGENCE.md
+│   │       ├── BACKLOG-OPERATIONS-V1.md
+│   │       ├── EPIC-0.8-X-CANONICAL-PAGE-SURFACE-RETIREMENT.md
+│   │       ├── EPIC-0.9.0-SEMANTIC-ENTITY-PROJECTION.md
+│   │       ├── PLAN-0.8-FINAL-CONFORMANCE-AND-RELEASE.md
+│   │       └── PRD-0.9.0-SEMANTIC-ENTITY-PROJECTION.md
+│   ├── frontend
+│   │   └── backlog
+│   │       ├── BACKLOG.md
+│   │       └── README.md
+│   ├── NEXUS-LAB
+│   │   ├── 00-INDICE.md
+│   │   ├── 01-DECISION-LOG.md
+│   │   ├── 02-BACKLOG-NX.md
+│   │   ├── 03-WORKFLOW.md
+│   │   ├── 04-FOUNDATION-API.md
+│   │   ├── 05-AF001-VERDETTO.md
+│   │   ├── 06-PROMPT-Q005.md
+│   │   ├── 07-PERSONA-AUTHORITIES-COSTO.md
+│   │   ├── 08-COST-CULTURE.md
+│   │   ├── 09-SERVER-PROVIDER-LAYER.md
+│   │   ├── 10-PROMPT-NX26.md
+│   │   ├── 11-CONNECTOR-LAYER.md
+│   │   ├── 12-MERCATO-CONOSCENZA.md
+│   │   ├── 13-X-MOAT-E-PRIMA-APPLICAZIONE.md
+│   │   ├── 14-AUTHORITY-ARCHITECTURE.md
+│   │   ├── 15-APPLICATION-AUTHORITY-EVIDENZE.md
+│   │   ├── 16-FOUNDATION-HEALTH.md
+│   │   ├── 17-NEXUS-LAB-HEALTH.md
+│   │   ├── 18-WHY-NEXUS-LAB-EXISTS.md
+│   │   ├── 19-METHOD-AGENT-GIUDIZIO.md
+│   │   ├── 20-CAPABILITA-ANALISI-MERCATO.md
+│   │   ├── 21-CAPACITA-OPENNEXUS.md
+│   │   ├── 22-PRIVACY-TOKENIZZAZIONE.md
+│   │   ├── 23-MOAT.md
+│   │   ├── 24-SCANSIONE-PER-CAPACITA.md
+│   │   ├── 25-SINTESI-SEMPLICE.md
+│   │   ├── 26-CHI-E-Y.md
+│   │   ├── 27-SCORING-ISTANZE.md
+│   │   ├── 28-PROMETEO-RENTRI.md
+│   │   ├── 29-PROMETEO-ANALISI.md
+│   │   ├── 30-MONETIZZAZIONE.md
+│   │   ├── 31-QUANTIZZAZIONE-PROMETEO.md
+│   │   ├── 32-MOTION-Y-IDEA-SITE-KNOWLEDGE.md
+│   │   ├── 33-INDICE-NX.md
+│   │   ├── 34-RIFERIMENTI.md
+│   │   ├── SORGENTI
+│   │   │   ├── 25-SCANSIONE-PROMETEO-RIFIUTI.md
+│   │   │   ├── AUTHORITY-MODEL.md
+│   │   │   ├── check-style-authority.mjs
+│   │   │   ├── CONTRACTS-REPORT-0.7.5.4C.md
+│   │   │   └── SCANSIONE-TECNICA-PROMETEO.md
+│   │   └── STRATEGIC-WORKFLOWS
+│   │       ├── G-AUDIT-ENGAGEMENT-CONTROL.md
+│   │       └── G-PILOT-BOOTSTRAP.md
+│   ├── research
+│   │   └── interviews
+│   │       └── G-AUDIT-GMP-PM.md
+│   ├── run-project.sh
+│   ├── tools
+│   │   └── documentation
+│   │       ├── inventory-documents.py
+│   │       ├── projects
+│   │       │   └── foundation.json
+│   │       ├── README.md
+│   │       └── tests
+│   │           └── test_inventory_documents.py
+│   ├── tree.txt
+│   └── uploads
+│       ├── 01-opennexus-closed-core-strategy.txt
+│       ├── 02-opennexus-cognition-roadmap.txt
+│       ├── 03-opennexus-verticale-rifiuti.txt
+│       ├── 04-nexus-lab-recap-startup-funding.txt
+│       ├── 05-nexus-lab-presentazione.txt
+│       ├── 06-nexus-lab-intervista-verticale.txt
+│       ├── 26-NEXUS-PROMETEO-BRAIN-NETWORK.txt
+│       ├── ajax.js
+│       ├── debug.js
+│       ├── dom.js
+│       ├── find.txt
+│       ├── image-1.png
+│       ├── main.js
+│       ├── md5.js
+│       ├── module.js
+│       ├── NEXUS-recap-ufficiale.pdf
+│       ├── Screenshot 2026-09-20 alle 09.20.47.png
+│       ├── supremacy.js
+│       ├── tree.txt
+│       ├── untitled text.txt
+│       ├── user_settings.js
+│       ├── WhatsApp Image 2026-10-01 at 11.32.14.jpeg
+│       ├── WhatsApp Image 2026-10-01 at 11.32.15.jpeg
+│       ├── WhatsApp Image 2026-10-01 at 11.32.16.jpeg
+│       └── WhatsApp Image 2026-10-01 at 11.32.17.jpeg
+├── run-project.sh
+└── tree.txt
+
+36 directories, 141 files
