@@ -1,0 +1,21 @@
+{
+  "$schema": "./schemas/workspace-spec.schema.json",
+  "schemaVersion": "nexus-lab/workspace-spec/v1",
+  "workspaceId": "nexus-lab",
+  "projects": [
+    {
+      "id": "nexus-lab-control-plane",
+      "name": "Nexus Lab control plane",
+      "path": ".",
+      "type": "rules",
+      "runtime": "shell",
+      "role": "control-plane",
+      "git": {
+        "remote": "github.com/default2368/nexus-lab.git"
+      }
+    }
+  ],
+  "allowedPlanIds": [
+    "synthetic-smoke"
+  ]
+}

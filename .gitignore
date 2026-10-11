@@ -1,0 +1,6 @@
+.nexus/workspace.local.json
+.nexus/workspace.lock.json
+.nexus/receipts/
+workspaces/*
+!workspaces/.gitignore
+!workspaces/README.md

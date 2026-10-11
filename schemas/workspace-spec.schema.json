@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://default2368.github.io/nexus-lab/schemas/workspace-spec.schema.json",
+  "title": "Nexus Lab workspace specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "workspaceId", "projects"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": "nexus-lab/workspace-spec/v1" },
+    "workspaceId": { "$ref": "#/$defs/id" },
+    "projects": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/project" }
+    },
+    "allowedPlanIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/id" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "path", "type", "runtime", "role"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "path": { "$ref": "#/$defs/relativePath" },
+        "type": {
+          "enum": ["app", "library", "scripts", "documentation", "rules", "research", "container"]
+        },
+        "runtime": {
+          "enum": ["node", "python", "js", "rust", "go", "shell", "-"]
+        },
+        "role": {
+          "enum": ["root", "control-plane", "primary", "secondary", "temp"]
+        },
+        "git": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["remote"],
+              "properties": { "remote": { "type": "string", "minLength": 1 } }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
