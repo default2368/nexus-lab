@@ -3,4 +3,4 @@
 .nexus/receipts/
 workspaces/*
 !workspaces/.gitignore
-!workspaces/README.md
+!workspaces/.gitkeep
