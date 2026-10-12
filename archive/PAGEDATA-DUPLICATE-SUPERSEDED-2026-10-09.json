@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "pagedata/v0.8",
+  "pageId": "nexus-lab/24-scansione-per-capacita",
+  "title": "Scansione di mercato per capacità — repeatability test",
+  "template": "knowledge-dossier",
+  "blocks": [
+    {
+      "type": "claim-list",
+      "claims": [
+        {
+          "id": "NX24-27020D8C",
+          "text": "Confronto multiplo B2B vs B2C: 238 abbonati valgono più di 25.000 utenti",
+          "status": "OBSERVED",
+          "sha": "0553d2ee8a1d"
+        },
+        {
+          "id": "NX24-D9201A6E",
+          "text": "Spread ricavo per testa B2C vs B2B: B2C               72.000           $18.000       $0,25              2,8×  ricavo\nfintech trading B2C          25.000           $25.000       $1,00              0,48",
+          "status": "OBSERVED",
+          "sha": "9f097eae4c54"
+        },
+        {
+          "id": "NX24-E16E31CA",
+          "text": "Multiplo 6,9× a favore 238 abbonati: multiplo chiesto\n──────────────────────────────────────────────────────────────────────────────────────────────\njob seeker B2C               72.000           $18.0",
+          "status": "OBSERVED",
+          "sha": "a903fe48f4a2"
+        },
+        {
+          "id": "NX24-C1108F6D",
+          "text": "Job seeker candidato vs career service: $0,25/utente/anno\nJob Seeker verso CAREER SERVICE   → mercato da $387/cliente/anno\n                                    stesso prodotto, 1.500× di differenza\n```",
+          "status": "OBSERVED",
+          "sha": "d3ec4f1237dd"
+        },
+        {
+          "id": "NX24-67E2633D",
+          "text": "Banda realistica pilota $11k-50k ARR: banda obiettivo per il pilota**\n\nIl data point più vicino alla capacità di analisi di mercato è:\n\n```text\nAI market insights    $11.213 di ricavo · $30.000 richie",
+          "status": "INFERRED",
+          "sha": "6b56003cae21"
+        },
+        {
+          "id": "NX24-EEE1CECD",
+          "text": "Premio verticale 7-70× Visualping vs Particl: premio di verticale, quantificato\n\n```text\nVisualping   ORIZZONTALE   qualunque sito, qualunque cambio     $14 – $140/mese\nParticl      VERTICALE     reta",
+          "status": "OBSERVED",
+          "sha": "bb19acc3f50b"
+        },
+        {
+          "id": "NX24-875990B7",
+          "text": "Governance come tier di prezzo GoMarble: governance è un asse di pricing",
+          "status": "OBSERVED",
+          "sha": "393ebc66a7fe"
+        },
+        {
+          "id": "NX24-4B23F7E0",
+          "text": "Governance come tier di prezzo GoMarble: GOVERNANCE è un asse di pricing",
+          "status": "OBSERVED",
+          "sha": "86e7484fbc12"
+        },
+        {
+          "id": "NX24-07BF8137",
+          "text": "NX-19 prerequisito modello pricing, non ottimizzazione: NX-19 è prerequisito del modello di pricing",
+          "status": "INFERRED",
+          "sha": "a9b7685fc64d"
+        },
+        {
+          "id": "NX24-8C41BE29",
+          "text": "7 frizioni su 9 hanno risposta progettata: 7 frizioni su 9 hanno già risposta progettata\nNUOVO        2 frizioni non hanno risposta: curva di apprendimento (letale per\n             la persona dichiara",
+          "status": "OBSERVED",
+          "sha": "fdfebefae590"
+        }
+      ]
+    },
+    {
+      "type": "matrix",
+      "id": "asse-1",
+      "rows": 7,
+      "source": "Acquire.com 2026-09-14",
+      "provenance": "deterministic parsing + candidate claims"
+    },
+    {
+      "type": "metric",
+      "id": "banda",
+      "value": "$11k–$50k ARR, 2,7–3,0×",
+      "evidence": "7 inserzioni con ricavo dichiarato"
+    }
+  ],
+  "provenance": {
+    "sourceFile": "24-SCANSIONE-PER-CAPACITA.md",
+    "sourceSha": "582d4373807d",
+    "generatedAt": "2026-10-09T19:08:11.495136+00:00",
+    "tool": "repeatability-test-24.py v0.1.0",
+    "recordCount": 12
+  }
+}

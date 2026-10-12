@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Nexus — Si ricorda dove</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#fcfcf9;color:#1a1a18;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{display:grid;grid-template-columns:280px 1fr 360px;min-height:100vh}
+  /* LEFT */
+  .left{border-right:1px solid #ece9e2;padding:28px 18px;background:#fdfcf8}
+  .filter{display:flex;align-items:center;gap:8px;color:#8a877f;font-size:13px;margin-bottom:28px;letter-spacing:.02em}
+  .claim{padding:14px 12px;border-radius:10px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;transition:.15s}
+  .claim:hover{background:#f5f1e8}
+  .claim.active{background:#f0ece1;box-shadow:inset 3px 0 0 #9db0c5}
+  .dot{width:14px;height:14px;border-radius:50%;margin-top:3px;flex-shrink:0}
+  .claim-text{font-size:13.5px;line-height:1.45;color:#2b2b28}
+  .claim-meta{font-size:11px;color:#a8a5a0;margin-left:auto;padding-left:8px}
+  /* CENTER */
+  .center{padding:48px 56px;max-width:720px}
+  .meta-top{display:flex;gap:10px;align-items:center;margin-bottom:22px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a9790;letter-spacing:.04em}
+  .badge{border:1px solid #d6d2c7;padding:4px 10px;border-radius:20px;font-size:10.5px;letter-spacing:.08em}
+  h1{font-family:'Fraunces',serif;font-weight:300;font-size:48px;line-height:1.05;letter-spacing:-.02em;margin-bottom:32px;color:#1f1e1b}
+  .evidence-label{font-size:11px;letter-spacing:.12em;color:#a8a5a0;text-transform:uppercase;margin:36px 0 16px}
+  .ev{border-top:1px solid #eee9dd;padding:18px 0;display:flex;gap:14px}
+  .ev-icon{width:28px;height:28px;border-radius:8px;background:#f5f1e8;display:grid;place-items:center;font-size:14px;margin-top:2px}
+  .ev-title{font-size:14px;font-weight:600;margin-bottom:4px}
+  .ev-desc{font-size:13px;color:#6b6862;line-height:1.5;max-width:420px}
+  .ev-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .count{font-family:'JetBrains Mono';font-size:12px;color:#9a9790}
+  .btn-view{border:1px solid #c9d6e3;color:#5a7aa0;background:#f0f5f9;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer}
+  .btn-view:hover{background:#e3edf5}
+  /* RIGHT */
+  .right{padding:24px;border-left:1px solid #ece9e2;background:#fdfcf8}
+  .card{border:1px solid #e8e2d5;border-radius:18px;padding:22px;background:white;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+  .card-title{font-size:15px;font-weight:600;margin-bottom:18px;display:flex;justify-content:space-between}
+  .label{font-size:10px;letter-spacing:.12em;color:#a8a5a0;text-transform:uppercase;margin:18px 0 6px}
+  .value{font-size:13px;color:#2b2b28;word-break:break-all;line-height:1.4}
+  .mono{font-family:'JetBrains Mono';font-size:12px}
+  .excerpt-box{margin-top:10px;background:#fcfaf5;border:1px solid #ece6d8;border-radius:12px;padding:16px;font-size:13px;line-height:1.6;color:#4a4844}
+  .actions{display:flex;gap:10px;margin-top:18px}
+  .btn{padding:10px 16px;border-radius:10px;font-size:13px;cursor:pointer;border:1px solid #e2ddd2;background:white}
+  .btn-primary{background:#7a9bbf;color:white;border-color:#7a9bbf}
+  .magic-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a18;color:#f5f1e8;padding:12px 22px;border-radius:30px;font-size:12.5px;display:flex;gap:14px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.2);font-family:'JetBrains Mono'}
+  .magic-dot{width:6px;height:6px;background:#8fbc8f;border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="left">
+    <div class="filter">≋ Filter</div>
+    <div class="claim"><div class="dot" style="background:#9db0a8"></div><div class="claim-text">La Terra ha circa 4.5 miliardi di anni</div><div class="claim-meta">12</div></div>
+    <div class="claim"><div class="dot" style="background:#9db0c5"></div><div class="claim-text">L'acqua bolle a 100°C a livello del mare</div><div class="claim-meta">8</div></div>
+    <div class="claim active"><div class="dot" style="background:#9db0a8;border:3px solid #e0e8e0"></div><div class="claim-text">Le specie evolvono per selezione naturale e deriva genetica</div><div class="claim-meta">24</div></div>
+    <div class="claim"><div class="dot" style="background:#d4a08a"></div><div class="claim-text">La vitamina C cura il raffreddore</div><div class="claim-meta">3</div></div>
+    <div class="claim"><div class="dot" style="background:#c5b0d4"></div><div class="claim-text">L'universo è in espansione</div><div class="claim-meta">17</div></div>
+    <div class="claim"><div class="dot" style="background:#8fb0a0"></div><div class="claim-text">L'attività umana influenza il clima globale</div><div class="claim-meta">29</div></div>
+    <div style="margin-top:24px;color:#b8b5b0;font-size:13px;padding:0 12px">+ New claim</div>
+  </div>
+  <div class="center">
+    <div class="meta-top"><span class="badge">OSSERVATO</span> v0.1.0 · 2024-05-20 · a1b2c3d</div>
+    <h1>Le specie evolvono per selezione naturale e deriva genetica</h1>
+    <div class="evidence-label">Evidence</div>
+    <div class="ev"><div class="ev-icon">📄</div><div><div class="ev-title">Fossil record</div><div class="ev-desc">Resti fossili mostrano cambiamenti graduali nelle specie nel corso di milioni di anni.</div></div><div class="ev-right"><span class="count">12</span><button class="btn-view">View</button></div></div>
+    <div class="ev"><div class="ev-icon">🧬</div><div><div class="ev-title">Studi genetici</div><div class="ev-desc">Confronti di sequenze DNA rivelano variazioni genetiche e relazioni evolutive.</div></div><div class="ev-right"><span class="count">9</span><button class="btn-view">View</button></div></div>
+    <div class="ev"><div class="ev-icon">🔗</div><div><div class="ev-title">Evidenza osservazionale</div><div class="ev-desc">Studi sul campo di popolazioni naturali mostrano selezione in azione.</div></div><div class="ev-right"><span class="count">15</span><button class="btn-view">View</button></div></div>
+    <div style="margin-top:24px;color:#b8b5b0;font-size:13px">+ Add evidence</div>
+    <div style="margin-top:80px;padding:20px;background:#f5f1e8;border-radius:12px;font-size:12.5px;line-height:1.6;color:#6b6862">
+      <strong style="color:#2b2b28">Perché sembra fatta bene:</strong> ogni affermazione ha una fonte, una data, un hash. Non è un chatbot che inventa. È un dossier che <em>si ricorda dove</em>. La magia non è l'AI. È che non puoi barare.
+    </div>
+  </div>
+  <div class="right">
+    <div class="card">
+      <div class="card-title">Source · Provenance <span>↗</span></div>
+      <div class="label">URL</div><div class="value mono">https://example.com/source… ↗</div>
+      <div class="label">Collected at</div><div class="value mono">2024-05-20T10:30:00Z</div>
+      <div class="label">Content SHA</div><div class="value mono">a1b2c3d4e5f6…7gh8i9j… ⎙</div>
+      <div class="label">Excerpt</div>
+      <div class="excerpt-box">The fossil record provides strong evidence for the theory of evolution. Over millions of years, species have gradually changed, adapted to their environments, and given rise to new lineages through natural selection and genetic drift…<br><br><span style="color:#9a9790;font-size:11px">View full source ↗</span></div>
+      <div class="actions"><button class="btn">Edit ✎</button><button class="btn btn-primary">Open source ↗</button></div>
+    </div>
+    <div style="margin-top:18px;padding:16px;border-radius:12px;background:#f0ece1;font-size:11.5px;line-height:1.5;color:#6b6862;font-family:'JetBrains Mono'">
+      GATE: deterministic<br>
+      ✓ JSON schema valido<br>
+      ✓ excerpt non vuoto<br>
+      ✓ content_sha coerente<br>
+      ✓ collected_at derivato<br>
+      → record entra nel corpus
+    </div>
+  </div>
+</div>
+<div class="magic-bar"><div class="magic-dot"></div> Foundation osserva (classe 0) · X interpreta (classe 1) · costo: $0.00066 / sweep <span style="opacity:.5">·</span> <span style="color:#8fbc8f">fatta bene</span></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{"line": 1, "level": 1, "title": "NX-61 · Design della scansione di mercato per capacità", "sha": "7d3e9e1d"}
+{"line": 10, "level": 2, "title": "1. Il numero che era già nei dati", "sha": "b3548ca0"}
+{"line": 26, "level": 3, "title": "1.1 Il contrasto", "sha": "c91b8b40"}
+{"line": 35, "level": 3, "title": "1.2 E la valutazione segue", "sha": "cec97eae"}
+{"line": 48, "level": 3, "title": "1.3 Avvertenze oneste", "sha": "5a356871"}
+{"line": 63, "level": 3, "title": "1.4 Conseguenza immediata sulle sonde", "sha": "1a2aa8db"}
+{"line": 77, "level": 2, "title": "2. L'errore di impostazione della scansione", "sha": "811302a5"}
+{"line": 96, "level": 2, "title": "3. La matrice di ricerca per capacità", "sha": "ee975a59"}
+{"line": 146, "level": 3, "title": "3.1 Priorità degli assi", "sha": "05437e87"}
+{"line": 160, "level": 2, "title": "4. La matrice di registrazione", "sha": "e841b182"}
+{"line": 179, "level": 3, "title": "4.1 Regole di filtro", "sha": "b861895f"}
+{"line": 202, "level": 2, "title": "5. Cosa risponderebbe ogni esito", "sha": "96c4870e"}
+{"line": 229, "level": 2, "title": "6. Fonti oltre Acquire", "sha": "7a3d66e9"}
+{"line": 262, "level": 2, "title": "7. Il limite della scansione, da dichiarare", "sha": "b1bd48e5"}
+{"line": 279, "level": 2, "title": "8. ESITO Asse 1 — analisi di mercato con evidenza (2026-09-14)", "sha": "a8492222"}
+{"line": 283, "level": 3, "title": "8.1 Il campione", "sha": "3d3eb4aa"}
+{"line": 300, "level": 3, "title": "8.2 Tre numeri che il campione contiene e che vanno calcolati", "sha": "c7713934"}
+{"line": 364, "level": 3, "title": "8.3 Il filtro che il campione suggerisce — e che non era previsto", "sha": "5658208f"}
+{"line": 400, "level": 3, "title": "8.4 Due proposizioni di valore, collassate in una", "sha": "828ac9dc"}
+{"line": 434, "level": 3, "title": "8.5 Esito dell'asse", "sha": "35450662"}
+{"line": 446, "level": 3, "title": "8.6 Prossimo passo dell'asse — corretto", "sha": "9bed8e70"}
+{"line": 464, "level": 2, "title": "9. I due mercati — e perché servono entrambe le scansioni", "sha": "07fb4551"}
+{"line": 492, "level": 2, "title": "10. Design della scansione prodotto (NX-67)", "sha": "ce158217"}
+{"line": 494, "level": 3, "title": "10.1 Cosa cercare, in ordine di pertinenza", "sha": "b64d5168"}
+{"line": 523, "level": 3, "title": "10.2 Metriche — diverse da quelle di Acquire", "sha": "337b757c"}
+{"line": 538, "level": 3, "title": "10.3 La percentuale di piattaforma è una decisione di margine, non di distribuzione", "sha": "15c3d443"}
+{"line": 557, "level": 3, "title": "10.4 Le tre domande a cui questa scansione risponde", "sha": "f8dd6c2f"}
+{"line": 575, "level": 3, "title": "10.5 Avvertenza", "sha": "cfbd9ffb"}
+{"line": 590, "level": 2, "title": "11. Serie storica — l'unica versione del dataset che compone (NX-66)", "sha": "e069ae65"}
+{"line": 624, "level": 2, "title": "12. Seconda passata — pricing e frizioni (2026-09-14)", "sha": "f13b6cb2"}
+{"line": 629, "level": 3, "title": "12.1 Gli assi di pricing, tabulati", "sha": "f8e3c9ef"}
+{"line": 673, "level": 3, "title": "12.2 Il premio di verticale, quantificato", "sha": "8a956137"}
+{"line": 696, "level": 3, "title": "12.3 La chiusura: puoi vendere per-check solo se il check ti costa zero", "sha": "0b242506"}
+{"line": 733, "level": 3, "title": "12.4 Le frizioni mappate sull'architettura", "sha": "6b6bc1f6"}
+{"line": 780, "level": 3, "title": "12.5 Il pavimento che la scansione non ha visto", "sha": "d1cab104"}
+{"line": 802, "level": 2, "title": "13. Esito aggiornato", "sha": "b3eef3e8"}
+{"line": 826, "level": 2, "title": "14. Backlog", "sha": "732e4e67"}

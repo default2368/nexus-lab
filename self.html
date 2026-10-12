@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenNexus — A Living Network</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e1a;--bg2:#111827;--card:#151d2e;--line:#1e2a41;--text:#e5e7eb;--muted:#8b95a8;--accent:#8b5cf6;--cyan:#22d3ee;--green:#34d399;--orange:#fb923c;--pink:#e879f9}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.serif{font-family:'Fraunces',serif}
+
+/* NAV like screenshot */
+nav{position:sticky;top:0;z-index:50;background:rgba(10,14,26,.8);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
+.logo{font-weight:600;letter-spacing:-.02em}
+.nav-links{display:flex;gap:22px;font-size:13px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;padding:72px 48px 48px;max-width:1280px;margin:0 auto;align-items:center}
+.hero h1{font-family:'Fraunces';font-size:64px;line-height:.95;font-weight:500;letter-spacing:-.03em}
+.hero h1 span{color:var(--muted);font-weight:300}
+.hero p.sub{margin-top:16px;color:var(--muted);font-size:15px;line-height:1.6;max-width:420px}
+.hero p.sub2{margin-top:12px;color:#5b6577;font-size:13px;line-height:1.5;max-width:420px}
+.btn{margin-top:24px;display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:white;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;border:0;transition:.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.3)}
+.hero-visual{position:relative;height:420px;border-radius:20px;background:radial-gradient(120% 120% at 70% 30%, #1a2340 0%, #0a0e1a 60%);border:1px solid var(--line);overflow:hidden}
+#graph{width:100%;height:100%}
+
+/* STATS STRIP */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);display:flex;overflow-x:auto}
+.strip-item{flex:1;min-width:180px;padding:18px 24px;border-right:1px solid var(--line)}
+.strip-item .n{font-family:'Fraunces';font-size:28px;font-weight:500}
+.strip-item .l{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.strip-item .d{font-size:11px;color:#5b6577;margin-top:6px;line-height:1.4}
+
+/* SECTION */
+section{max-width:1280px;margin:0 auto;padding:64px 48px}
+.section-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.section-title{font-family:'Fraunces';font-size:36px;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.section-desc{color:var(--muted);font-size:14px;line-height:1.6;max-width:560px}
+
+/* FOUNDATION / X / CLI grid */
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative;overflow:hidden;transition:.3s}
+.card:hover{border-color:#2a3a5a;transform:translateY(-2px)}
+.card .k{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.card h3{margin-top:8px;font-size:16px;font-weight:600}
+.card p{margin-top:8px;font-size:13px;color:var(--muted);line-height:1.5}
+.card .code{margin-top:14px;background:#0a0e1a;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:'JetBrains Mono';font-size:11px;color:#7a8599;line-height:1.5}
+.card .glow{position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;filter:blur(30px);opacity:.4}
+.card:nth-child(1) .glow{background:var(--cyan)}
+.card:nth-child(2) .glow{background:var(--accent)}
+.card:nth-child(3) .glow{background:var(--green)}
+
+/* CAPABILITIES */
+.caps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.cap{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.cap-dot{width:8px;height:8px;border-radius:50%}
+.cap.ver .cap-dot{background:var(--green)}
+.cap.par .cap-dot{background:var(--orange)}
+.cap.teo .cap-dot{background:#3a4155}
+.cap .t{font-size:13px;font-weight:500}
+.cap .s{font-size:11px;color:var(--muted);margin-left:auto;font-family:'JetBrains Mono'}
+
+/* MOAT */
+.moat{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap}
+.moat-item{padding:8px 14px;border-radius:20px;font-size:11px;font-family:'JetBrains Mono';border:1px solid var(--line);background:var(--card)}
+.moat-item.built{border-color:rgba(52,211,153,.3);color:var(--green)}
+.moat-item.cond{border-color:rgba(251,146,60,.3);color:var(--orange)}
+
+/* DOSSIER preview - light theme inside dark */
+.dossier-wrap{margin-top:40px;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#fcfcf9}
+.dossier{display:grid;grid-template-columns:260px 1fr 320px;min-height:520px}
+.dossier-left{border-right:1px solid #ece9e2;background:#fdfcf8;padding:18px}
+.dossier-center{padding:28px 32px;background:#fcfcf9}
+.dossier-right{border-left:1px solid #ece9e2;background:#fdfcf8;padding:18px}
+
+/* cost */
+.cost{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;align-items:center}
+.cost-bar{height:8px;background:#1a2340;border-radius:10px;overflow:hidden;position:relative}
+.cost-fill{height:100%;border-radius:10px;transition:width 2s ease}
+.cost-fill.bad{width:95%;background:linear-gradient(90deg,#ef4444,#fb923c)}
+.cost-fill.good{width:8%;background:linear-gradient(90deg,#34d399,#22d3ee)}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.float{animation:float 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">OpenNexus</div>
+  <div class="nav-links">
+    <a class="active">OpenNexus</a><a>Library</a><a>Topics</a><a>Manifest 6</a><a>Architecture</a><a>About OpenNexus</a>
+  </div>
+  <div style="color:var(--muted)">☼</div>
+</nav>
+
+<div class="hero">
+  <div>
+    <h1>OpenNexus<br><span style="font-size:38px">A Living Network<br>of Connected Knowledge</span></h1>
+    <p class="sub">Explore topics, principles, architectures and knowledge assets through a discovery-driven experience.</p>
+    <p class="sub2">Tutti i dati sono strutturati. Per questo può presentare se stessa. Non è una landing: è la proiezione del corpus.</p>
+    <button class="btn">→ Explore the Library</button>
+    <div style="margin-top:28px;display:flex;gap:18px;font-size:11px" class="mono">
+      <span style="color:var(--green)">● 34 documenti</span>
+      <span style="color:var(--cyan)">● 107 voci NX</span>
+      <span style="color:var(--orange)">● 12 capacità</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <canvas id="graph"></canvas>
+    <div style="position:absolute;bottom:14px;left:14px;right:14px;display:flex;justify-content:space-between;font-size:10px;color:#5b6577" class="mono">
+      <span>PageData is the language</span><span>Runtime never observes repo</span>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="strip-item"><div class="n">5</div><div class="l">Stratificazioni sopravvissute</div><div class="d">Astro+React, test 80%, no regressioni</div></div>
+  <div class="strip-item"><div class="n">6</div><div class="l">Authority formalizzate</div><div class="d">Application · Content · Domain · Design · Theme · Primitive</div></div>
+  <div class="strip-item"><div class="n">450×</div><div class="l">Reduction pipeline</div><div class="d">$864 → $0.10/mese, Classe 0</div></div>
+  <div class="strip-item"><div class="n">7–70×</div><div class="l">Premio verticale</div><div class="d">Visualping $14 vs Particl $1000</div></div>
+  <div class="strip-item"><div class="n">B+ / A−</div><div class="l">Artefatto / Ente</div><div class="d">Macchina solida, manca qualcuno fuori</div></div>
+</div>
+
+<section>
+  <div class="section-label">Il confine è la linea di distribuzione</div>
+  <div class="section-title">Foundation produce,<br>Execution esegue.</div>
+  <div class="section-desc">80% clonabile è voluto: è l'Execution Shell. 20% non spedito: BundleCollector, VALIDATE gate, Migration Engine, telemetria che compone. Per questo sembra strano se guardi solo il repo.</div>
+  <div class="tri">
+    <div class="card"><div class="glow"></div><div class="k">Locale · Spedito · Sottile</div><h3>EXECUTION SHELL</h3><p>Contratti pubblici, Discovery su Artifacts, Renderer minificato, CLI. Zero rete nel request path.</p><div class="code">ApplicationDefinition<br>→ ApplicationContext<br>→ Discovery → PageData<br>→ Template → Experience</div></div>
+    <div class="card"><div class="glow"></div><div class="k">Remoto · Mai spedito · Tokenizzato</div><h3>FOUNDATION API</h3><p>BundleCollector, Compiler Bundle→Artifacts, Validator, Registry + versioning, telemetria.</p><div class="code">POST /v1/compile<br>Bearer nexus_...<br>→ Build Artifacts firmati<br>→ validati, versionati</div></div>
+    <div class="card"><div class="glow"></div><div class="k">Deterministico · Gratis · Classe 0</div><h3>CLI + REDUCTION</h3><p>Scraping, estrazione token, hashing, score, delta, content_sha. L'LLM non legge mai la sorgente.</p><div class="code">sorgente grezza (grande)<br>→ estrazione (gratis)<br>→ score (piccolissimo)<br>→ LLM (pochi token)</div></div>
+  </div>
+</section>
+
+<section style="background:var(--bg2);max-width:100%;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 48px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div>
+        <div class="section-label">Inventario capacità C-01 → C-12</div>
+        <div class="section-title" style="font-size:28px">4 verificate,<br>4 parziali, 4 teoriche,<br>0 esercitate fuori.</div>
+        <div class="caps">
+          <div class="cap ver"><div class="cap-dot"></div><div class="t">Conoscenza navigabile</div><div class="s">VERIFICATA</div></div>
+          <div class="cap ver"><div class="cap-dot"></div><div class="t">Multi-app runtime</div><div class="s">VERIFICATA</div></div>
+          <div class="cap ver"><div class="cap-dot"></div><div class="t">Governance visiva</div><div class="s">21 test / 690ms</div></div>
+          <div class="cap ver"><div class="cap-dot"></div><div class="t">Proiezione semantica</div><div class="s">VERIFICATA</div></div>
+          <div class="cap par"><div class="cap-dot"></div><div class="t">Produzione artefatti</div><div class="s">PARZIALE</div></div>
+          <div class="cap par"><div class="cap-dot"></div><div class="t">Sessione policy-driven</div><div class="s">PARZIALE</div></div>
+          <div class="cap par"><div class="cap-dot"></div><div class="t">Reduction deterministica</div><div class="s">PARZIALE</div></div>
+          <div class="cap par"><div class="cap-dot"></div><div class="t">Governare decisioni</div><div class="s">PARZIALE</div></div>
+        </div>
+        <div class="moat">
+          <div class="moat-item built">M-01 invariante accumulata ✓ COSTRUITO</div>
+          <div class="moat-item built">M-02 governance eseguibile ✓ COSTRUITO</div>
+          <div class="moat-item built">M-03 boundary compilato ✓ COSTRUITO</div>
+          <div class="moat-item built">M-05 storia falsificazioni ✓ COSTRUITO</div>
+          <div class="moat-item cond">M-04 residuo che compone ◐ CONDIZIONALE</div>
+          <div class="moat-item cond">M-06 posizione normativa ◐ CONDIZIONALE</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">La magia è nei dettagli che non si vedono</div>
+        <div class="cost">
+          <div>
+            <div style="font-size:11px;color:var(--muted)" class="mono">APPROCCIO INGENUO — LLM legge tutto</div>
+            <div style="font-family:'Fraunces';font-size:22px;margin:6px 0">$864<span style="font-size:14px;color:var(--muted)">/mese</span></div>
+            <div class="cost-bar"><div class="cost-fill bad"></div></div>
+            <div style="font-size:11px;color:#5b6577;margin-top:8px" class="mono">50 fonti × 20k token × 96 sweep/giorno</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--green)" class="mono">REDUCTION + TRIGGER deterministico</div>
+            <div style="font-family:'Fraunces';font-size:22px;margin:6px 0">$0.10<span style="font-size:14px;color:var(--muted)">/mese</span></div>
+            <div class="cost-bar"><div class="cost-fill good"></div></div>
+            <div style="font-size:11px;color:#5b6577;margin-top:8px" class="mono">fetch + content_sha + score (Classe 0) + LLM solo su soglia</div>
+          </div>
+        </div>
+        <div style="margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px">
+          <div style="font-size:11px;letter-spacing:.1em;color:var(--muted)" class="mono">BRAIN — IL PRODOTTO NON È LA RISPOSTA. È IL RECORD.</div>
+          <div style="margin-top:12px;display:grid;gap:8px;font-size:12px" class="mono">
+            <div><span style="color:var(--green)">OSSERVATO</span> <span style="color:#5b6577">→ con riferimento verificabile</span></div>
+            <div><span style="color:var(--orange)">INFERITO</span> <span style="color:#5b6577">→ sempre marcato, mai fuso</span></div>
+            <div><span style="color:#5b6577">LIMITE</span> <span style="color:#5b6577">→ ciò che non è stato possibile determinare</span></div>
+          </div>
+          <div style="margin-top:14px;font-size:12px;color:var(--muted);line-height:1.5">Ogni report che produciamo è già un record candidato. Il gate blocca, il Brain segnala, l'umano decide. Mai il contrario.</div>
+        </div>
+        <div style="margin-top:16px;font-size:13px;color:var(--muted);line-height:1.6">Per questo ogni risposta strutturata che ti do può essere codificata. <strong style="color:var(--text)">È progettato per mangiarsi i report che produce.</strong> Da qui la stranezza.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Cosa fatta bene — il dossier che si ricorda dove</div>
+  <div class="section-title">Fa le ricerche al posto tuo,<br>e si ricorda dove ha trovato ogni cosa.</div>
+  <div class="section-desc">Test della nonna. Se una persona non tecnica lo ripete il giorno dopo, la frase funziona. La magia non è l'AI. È che non puoi barare: ogni affermazione ha fonte, data, hash.</div>
+
+  <div class="dossier-wrap">
+    <div class="dossier">
+      <div class="dossier-left">
+        <div style="font-size:11px;color:#a8a5a0;display:flex;gap:6px;align-items:center">≋ Filter</div>
+        <div style="margin-top:18px;display:grid;gap:6px">
+          <div style="padding:10px;border-radius:8px;display:flex;gap:8px;background:#f5f1e8"><div style="width:8px;height:8px;border-radius:50%;background:#9db0a8;margin-top:6px"></div><div style="font-size:12px;line-height:1.4">B2B data intelligence $800k ARR · 3.09× multiplo</div></div>
+          <div style="padding:10px;border-radius:8px;display:flex;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#9db0c5;margin-top:6px"></div><div style="font-size:12px;line-height:1.4">Text-to-SQL 238 abb. $49k ARR · 3.01×</div></div>
+          <div style="padding:10px;border-radius:8px;display:flex;gap:8px;background:#f0ece1;border-left:3px solid #9db0c5"><div style="width:8px;height:8px;border-radius:50%;background:#9db0a8;margin-top:6px;box-shadow:0 0 0 3px #e0e8e0"></div><div style="font-size:12px;line-height:1.4"><strong>RENTRI: obbligo di rendere conto è il prodotto</strong> · K1 ✓✓</div></div>
+          <div style="padding:10px;border-radius:8px;display:flex;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#d4a08a;margin-top:6px"></div><div style="font-size:12px;line-height:1.4">Job seeker B2C $0.25/utente · 0.48×</div></div>
+        </div>
+      </div>
+      <div class="dossier-center">
+        <div style="display:flex;gap:8px;align-items:center;font-family:'JetBrains Mono';font-size:10px;color:#9a9790"><span style="border:1px solid #d6d2c7;padding:3px 8px;border-radius:20px">OSSERVATO</span> v0.1.0 · 2026-09-15 · a1b2c3d</div>
+        <h2 style="font-family:'Fraunces';font-weight:300;font-size:28px;line-height:1.1;margin-top:16px;color:#1f1e1b">RENTRI: quando cambia una norma, ti dice cosa cambia per te, con la fonte attaccata.</h2>
+        <div style="margin-top:24px;font-size:10px;letter-spacing:.12em;color:#a8a5a0;text-transform:uppercase">Evidence</div>
+        <div style="margin-top:12px;border-top:1px solid #eee9dd;padding:14px 0;display:flex;gap:10px"><div style="width:26px;height:26px;background:#f5f1e8;border-radius:8px;display:grid;place-items:center">📄</div><div><div style="font-size:13px;font-weight:600;color:#1f1e1b">Registro elettronico nazionale</div><div style="font-size:12px;color:#6b6862;line-height:1.4">Catena di responsabilità, sanzioni, evidenza non è lusso.</div></div><div style="margin-left:auto;font-family:'JetBrains Mono';font-size:11px;color:#9a9790">12</div></div>
+        <div style="border-top:1px solid #eee9dd;padding:14px 0;display:flex;gap:10px"><div style="width:26px;height:26px;background:#f5f1e8;border-radius:8px;display:grid;place-items:center">⚖️</div><div><div style="font-size:13px;font-weight:600;color:#1f1e1b">BRAIN-002/003 deterministici</div><div style="font-size:12px;color:#6b6862;line-height:1.4">Confronta scadenza con autorizzazione, rileva incongruenze registro/formulario — Classe 0, costo zero.</div></div><div style="margin-left:auto;font-family:'JetBrains Mono';font-size:11px;color:#9a9790">9</div></div>
+        <div style="border-top:1px solid #eee9dd;padding:14px 0;display:flex;gap:10px"><div style="width:26px;height:26px;background:#f5f1e8;border-radius:8px;display:grid;place-items:center">🔗</div><div><div style="font-size:13px;font-weight:600;color:#1f1e1b">Network di responsabilità</div><div style="font-size:12px;color:#6b6862;line-height:1.4">Produttore → trasportatore → destinatario → impianto. Ogni relazione: proprietario, scopo, durata, log.</div></div><div style="margin-left:auto;font-family:'JetBrains Mono';font-size:11px;color:#9a9790">15</div></div>
+        <div style="margin-top:20px;background:#f5f1e8;border-radius:10px;padding:14px;font-size:11.5px;color:#6b6862;line-height:1.5"><strong style="color:#2b2b28">Perché è N-settori:</strong> ogni azienda che produce rifiuti, in qualsiasi settore, ha lo stesso obbligo. Non incanala il progetto: produce valore in N settori con stesso meccanismo.</div>
+      </div>
+      <div class="dossier-right">
+        <div style="border:1px solid #e8e2d5;border-radius:16px;padding:16px;background:white">
+          <div style="font-size:13px;font-weight:600;display:flex;justify-content:space-between">Source · Provenance <span>↗</span></div>
+          <div style="font-size:9px;letter-spacing:.1em;color:#a8a5a0;text-transform:uppercase;margin-top:14px">URL</div><div style="font-size:11px;font-family:'JetBrains Mono';word-break:break-all">prometeorifiuti.com/cosa-fa-prometeo/ ↗</div>
+          <div style="font-size:9px;letter-spacing:.1em;color:#a8a5a0;text-transform:uppercase;margin-top:12px">Collected at</div><div style="font-size:11px;font-family:'JetBrains Mono'">2026-09-15T10:30:00Z</div>
+          <div style="font-size:9px;letter-spacing:.1em;color:#a8a5a0;text-transform:uppercase;margin-top:12px">Content SHA</div><div style="font-size:11px;font-family:'JetBrains Mono'">a1b2c3d4e5f6… ⎙</div>
+          <div style="margin-top:12px;background:#fcfaf5;border:1px solid #ece6d8;border-radius:10px;padding:12px;font-size:11.5px;line-height:1.5;color:#4a4844">Registro di carico e scarico, formulari e XFIR, MUD, RENTRI, autorizzazioni e scadenze… oltre 2.000 installazioni dichiarate dal fornitore.</div>
+          <div style="display:flex;gap:8px;margin-top:12px"><button style="padding:8px 12px;border-radius:8px;border:1px solid #e2ddd2;background:white;font-size:11px">Edit ✎</button><button style="padding:8px 12px;border-radius:8px;border:1px solid #7a9bbf;background:#7a9bbf;color:white;font-size:11px">Open source ↗</button></div>
+        </div>
+        <div style="margin-top:12px;background:#f0ece1;border-radius:10px;padding:12px;font-family:'JetBrains Mono';font-size:10px;line-height:1.5;color:#6b6862">
+          GATE: deterministic<br>✓ JSON schema valido<br>✓ excerpt non vuoto<br>✓ content_sha coerente<br>✓ collected_at derivato<br>→ record entra nel corpus
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center;padding:48px 24px;color:#5b6577;font-size:12px" class="mono">
+  Open Nexus non modernizza e non aggiunge: rende attraversabile e dimostrabile ciò che già esiste. — D-083<br><br>
+  <span style="color:var(--green)">●</span> Foundation osserva (Classe 0) · X interpreta (Classe 1) · costo marginale ~zero · <span style="color:var(--green)">fatta bene</span>
+</div>
+
+<script>
+// Animated graph like screenshot
+const canvas = document.getElementById('graph');
+const ctx = canvas.getContext('2d');
+function resize(){canvas.width=canvas.offsetWidth*2;canvas.height=canvas.offsetHeight*2;ctx.scale(2,2)}
+resize();window.addEventListener('resize',resize);
+const nodes=[
+  {x:0.5,y:0.28,r:28,c:'#22d3ee',label:'Architecture',glow:'#22d3ee'},
+  {x:0.25,y:0.62,r:20,c:'#c084fc',label:'Principles',glow:'#c084fc'},
+  {x:0.5,y:0.62,r:18,c:'#22d3ee',label:'Topics',glow:'#22d3ee'},
+  {x:0.75,y:0.62,r:20,c:'#fb923c',label:'Patterns',glow:'#fb923c'},
+  {x:0.35,y:0.85,r:14,c:'#34d399',label:'Library',glow:'#34d399'},
+  {x:0.65,y:0.85,r:14,c:'#60a5fa',label:'Manifest 6',glow:'#60a5fa'},
+];
+let t=0;
+function draw(){
+  const W=canvas.offsetWidth,H=canvas.offsetHeight;
+  ctx.clearRect(0,0,W,H);
+  t+=0.01;
+  // connections
+  ctx.strokeStyle='rgba(100,120,160,.15)';ctx.lineWidth=1;
+  for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+    const a=nodes[i],b=nodes[j];const dist=Math.hypot(a.x-b.x,b.y-a.y);
+    if(dist<0.5){ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.stroke();}
+  }
+  // nodes
+  nodes.forEach((n,i)=>{
+    const x=n.x*W,y=n.y*H;
+    const pulse=Math.sin(t*2+i)*2;
+    // glow
+    const grad=ctx.createRadialGradient(x,y,0,x,y,n.r*2.5);
+    grad.addColorStop(0,n.glow+'66');grad.addColorStop(1,'transparent');
+    ctx.fillStyle=grad;ctx.beginPath();ctx.arc(x,y,n.r*2.5+pulse,0,Math.PI*2);ctx.fill();
+    // core
+    ctx.fillStyle=n.c;ctx.globalAlpha=.9;ctx.beginPath();ctx.arc(x,y,n.r/2.2,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+    // ring
+    ctx.strokeStyle=n.c+'55';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(x,y,n.r+pulse*0.5,0,Math.PI*2);ctx.stroke();
+    // label
+    ctx.fillStyle='#8b95a8';ctx.font='10px JetBrains Mono';ctx.textAlign='center';ctx.fillText(n.label,x,y+n.r+16);
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
